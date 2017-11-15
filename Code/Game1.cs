@@ -44,7 +44,9 @@ namespace TowerDefenceINF
         {
             
             GraphicsDevice.Clear(Color.Blue);
-            
+            spriteBatch.Begin();
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
