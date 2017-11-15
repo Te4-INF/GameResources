@@ -43,7 +43,6 @@ namespace TowerDefenceINF
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Blue);
-            
 
             base.Draw(gameTime);
         }
