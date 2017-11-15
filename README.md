@@ -1,5 +1,5 @@
-# TD_GameResources
-Repository for the tower defence game created by TE4INF. 
-* Step 1: Download the TowerDefenceINF.zip file and add it to visual studio.
+# Tower Defence
+* Step 1: Download the TowerDefenceINF.zip file and open the solution with Visual Studio.
 * Step 2: Make sure that the project is able to build without any errors.
-* Step 3: Start coding!
+* Step 3: Visit the flowchart for this project [here](https://drive.google.com/file/d/1-NLZopdXuCTg6BcyGrmIvb9luVPHE1rQ/view?usp=sharing).
+* Step 4: Start coding!
