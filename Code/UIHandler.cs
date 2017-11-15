@@ -8,5 +8,8 @@ namespace TowerDefenceINF.GameResources.Code
 {
     class UIHandler : MasterHandler
     {
+        protected void CheckStatus()
+        {
+        }
     }
 }
