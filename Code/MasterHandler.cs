@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefenceINF.GameResources.Code
 {
-    class MasterHandler
+   public class MasterHandler
     {
     }
 }

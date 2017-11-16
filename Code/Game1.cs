@@ -2,12 +2,15 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont UIfont;
+        UIHandler UIHandler = new UIHandler();
+        Player player; int life = 10, cash = 0, wave = 0; //default values
 
         public Game1()
         {
@@ -24,6 +27,7 @@ namespace TowerDefenceINF
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            UIfont = Content.Load<SpriteFont>("UI_font");
             
         }
         
@@ -42,8 +46,10 @@ namespace TowerDefenceINF
         
         protected override void Draw(GameTime gameTime)
         {
+            spriteBatch.Begin();
             GraphicsDevice.Clear(Color.Blue); //this is blue
-
+            spriteBatch.DrawString(UIfont, life.ToString(), new Vector2(100,100), Color.Black);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
