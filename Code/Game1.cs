@@ -10,7 +10,6 @@ namespace TowerDefenceINF.GameResources.Code
         SpriteBatch spriteBatch;
         SpriteFont UIfont;
         UIHandler UIHandler = new UIHandler();
-        Player player; int life = 10, cash = 0, wave = 0; //default values
 
         public Game1()
         {
@@ -48,7 +47,6 @@ namespace TowerDefenceINF.GameResources.Code
         {
             spriteBatch.Begin();
             GraphicsDevice.Clear(Color.Blue);
-            spriteBatch.DrawString(UIfont, life.ToString(), new Vector2(100,100), Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);
         }
