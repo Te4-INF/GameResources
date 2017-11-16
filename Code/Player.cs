@@ -8,5 +8,9 @@ namespace TowerDefenceINF.GameResources.Code
 {
     class Player
     {
+
+        public Player(int life, int cash, int wave)
+        {
+        }
     }
 }
