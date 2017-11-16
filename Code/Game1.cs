@@ -38,7 +38,8 @@ namespace TowerDefenceINF.GameResources.Code
             spriteBatch = new SpriteBatch(GraphicsDevice);
             UIfont = Content.Load<SpriteFont>("UI_font");
 
-            player = new Player(10, 25, 1);
+            int life = 10, cash = 25, wave = 1;
+            player = new Player(life, cash, wave);
             
         }
         
@@ -59,7 +60,7 @@ namespace TowerDefenceINF.GameResources.Code
         {
             spriteBatch.Begin();
             GraphicsDevice.Clear(Color.Blue);
-            Drawstring(spriteBatch, 10, new Vector2(100, 100));
+            Drawstring(spriteBatch, player.getLife(), new Vector2(100, 100));
             spriteBatch.End();
             base.Draw(gameTime);
         }

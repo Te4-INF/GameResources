@@ -18,5 +18,10 @@ namespace TowerDefenceINF.GameResources.Code
             this.cash = cash;
             this.wave = wave;
         }
+
+        public int getLife()
+        {
+            return life;
+        }
     }
 }
