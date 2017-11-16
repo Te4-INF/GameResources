@@ -29,5 +29,12 @@ namespace TowerDefenceINF
             }
 
         }
+
+        public override void Draw(SpriteBatch sb)
+        {
+
+            sb.Draw(tex, pos, Color.White);
+
+        }
     }
 }

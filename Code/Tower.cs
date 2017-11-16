@@ -27,7 +27,12 @@ namespace TowerDefenceINF
 
         }
 
-        public abstract void Update(GameTime gameTime, List<Enemy> enemyList);
+        public virtual void Update(GameTime gameTime, List<Enemy> enemyList)
+        {
+
+            
+
+        }
 
         public virtual bool IsColliding(Rectangle other)
         {
