@@ -8,11 +8,11 @@ namespace TowerDefenceINF.GameResources.Code
 {
      class Player
     {
-        int life = 10;
-        int cash = 25;
-        int wave = 1;
+        int life;
+        int cash;
+        int wave;
 
-        public Player(int life, int cash, int wave)
+        public Player(int life, int cash, int wave) : base()
         {
             this.life = life;
             this.cash = cash;

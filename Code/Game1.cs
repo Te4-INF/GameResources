@@ -9,12 +9,22 @@ namespace TowerDefenceINF.GameResources.Code
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont UIfont;
-        UIHandler UIHandler = new UIHandler();
+        Player player;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+        }
+
+        void Draw(SpriteBatch sb)
+        {
+            //empty
+        }
+
+        void Drawstring(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
+        {
+            sb.DrawString(UIfont, value.ToString(), stringPos, Color.White);
         }
 
         protected override void Initialize()
@@ -27,6 +37,8 @@ namespace TowerDefenceINF.GameResources.Code
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             UIfont = Content.Load<SpriteFont>("UI_font");
+
+            player = new Player(10, 25, 1);
             
         }
         
@@ -47,6 +59,7 @@ namespace TowerDefenceINF.GameResources.Code
         {
             spriteBatch.Begin();
             GraphicsDevice.Clear(Color.Blue);
+            Drawstring(spriteBatch, 10, new Vector2(100, 100));
             spriteBatch.End();
             base.Draw(gameTime);
         }
