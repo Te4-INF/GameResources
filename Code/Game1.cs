@@ -19,7 +19,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         void Draw(SpriteBatch sb)
         {
-            //empty
+            //empty //hej
         }
 
         void Drawstring(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
