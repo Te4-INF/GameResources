@@ -20,10 +20,32 @@ namespace TowerDefenceINF
 
             this.pos = pos;
             this.tex = tex;
+            boundingBox = new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
 
         }
 
         public abstract void Draw(SpriteBatch sb);
+
+        public virtual Rectangle GetBoundingBox()
+        {
+
+            return boundingBox;
+
+        }
+
+        public virtual Texture2D GetTexture()
+        {
+
+            return tex;
+
+        }
+
+        public virtual Vector2 GetPos()
+        {
+
+            return pos;
+
+        }
 
     }
 }
