@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace TowerDefenceINF.GameResources.Code
 {
-    class Player
+     class Player
     {
+        int life;
+        int cash;
+        int wave;
+
+        public Player(int life, int cash, int wave) : base()
+        {
+            this.life = life;
+            this.cash = cash;
+            this.wave = wave;
+        }
     }
 }
