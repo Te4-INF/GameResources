@@ -57,9 +57,9 @@ namespace TowerDefenceINF.GameResources.Code
         
         protected override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin();
             GraphicsDevice.Clear(Color.Blue);
-            Drawstring(spriteBatch, 10, new Vector2(100, 100));
+            spriteBatch.Begin();
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
