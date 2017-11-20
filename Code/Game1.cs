@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace TowerDefenceINF.GameResources.Code
 {
@@ -8,6 +9,7 @@ namespace TowerDefenceINF.GameResources.Code
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         SpriteFont UIfont;
         Player player;
 
@@ -19,7 +21,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         void Draw(SpriteBatch sb)
         {
-            //empty //hej
+            //empty
         }
 
         void Drawstring(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
