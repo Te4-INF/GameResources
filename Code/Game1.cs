@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TowerDefenceINF.GameResources.Code;
 
 namespace TowerDefenceINF
 {
@@ -8,6 +9,16 @@ namespace TowerDefenceINF
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        MapHandler mapHandler;
+        //TowerHandler towerHandler;
+        //BackBufferHandler bufferHandler;
+        //ProjectileHandler projectileHandler;
+        //UIHandler uIHandler;
+        //EnemyHandler enemyHandler;
+
+        int width = 1600;
+        int hight = 900;
 
         public Game1()
         {
@@ -17,14 +28,21 @@ namespace TowerDefenceINF
 
         protected override void Initialize()
         {
-
             base.Initialize();
         }
         
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            graphics.PreferredBackBufferHeight = hight;
+            graphics.PreferredBackBufferWidth = width;
+            graphics.ApplyChanges();
+            mapHandler = new MapHandler(graphics.GraphicsDevice);
+            //towerHandler = new TowerHandler(Content);
+            //backBufferHandler = new BackBufferHandler(Content);
+            //projectileHandler = new ProjectileHandler(Content);
+            //enemyHandler = new EnemyHandler(Content);
+
         }
         
         protected override void UnloadContent()
@@ -36,7 +54,6 @@ namespace TowerDefenceINF
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             
-
             base.Update(gameTime);
         }
         
@@ -45,6 +62,8 @@ namespace TowerDefenceINF
             
             GraphicsDevice.Clear(Color.Blue);
             spriteBatch.Begin();
+
+            mapHandler.Draw(spriteBatch);
 
             spriteBatch.End();
 
