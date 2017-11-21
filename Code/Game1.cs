@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TowerDefenceINF.GameResources.Code;
 using System.Collections.Generic;
 
 namespace TowerDefenceINF.GameResources.Code
@@ -9,7 +10,16 @@ namespace TowerDefenceINF.GameResources.Code
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
+        MapHandler mapHandler;
+        //TowerHandler towerHandler;
+        //BackBufferHandler bufferHandler;
+        //ProjectileHandler projectileHandler;
+        //UIHandler uIHandler;
+        //EnemyHandler enemyHandler;
 
+        int width = 1600;
+        int hight = 900;
         SpriteFont UIfont;
         Player player;
 
@@ -31,18 +41,25 @@ namespace TowerDefenceINF.GameResources.Code
 
         protected override void Initialize()
         {
-
             base.Initialize();
         }
         
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            graphics.PreferredBackBufferHeight = hight;
+            graphics.PreferredBackBufferWidth = width;
+            graphics.ApplyChanges();
+            mapHandler = new MapHandler(graphics.GraphicsDevice);
+            //towerHandler = new TowerHandler(Content);
+            //backBufferHandler = new BackBufferHandler(Content);
+            //projectileHandler = new ProjectileHandler(Content);
+            //enemyHandler = new EnemyHandler(Content);
+            
             UIfont = Content.Load<SpriteFont>("UI_font");
 
             int life = 10, cash = 25, wave = 1;
             player = new Player(life, cash, wave);
-            
         }
         
         protected override void UnloadContent()
@@ -54,13 +71,16 @@ namespace TowerDefenceINF.GameResources.Code
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             
-
             base.Update(gameTime);
         }
         
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Blue);
+            spriteBatch.Begin();
+
+            mapHandler.Draw(spriteBatch);
+            
             Drawstring(spriteBatch, player.getLife(), new Vector2(100, 100));
             spriteBatch.End();
             base.Draw(gameTime);
