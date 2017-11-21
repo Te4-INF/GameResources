@@ -12,7 +12,7 @@ namespace TowerDefenceINF.GameResources.Code
         SpriteBatch spriteBatch;
         
         MapHandler mapHandler;
-        //TowerHandler towerHandler;
+        TowerHandler towerHandler;
         //BackBufferHandler bufferHandler;
         //ProjectileHandler projectileHandler;
         //UIHandler uIHandler;
@@ -20,7 +20,6 @@ namespace TowerDefenceINF.GameResources.Code
 
         int width = 1600;
         int hight = 900;
-        SpriteFont UIfont;
         Player player;
 
         public Game1()
@@ -28,16 +27,9 @@ namespace TowerDefenceINF.GameResources.Code
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
+        
 
-        void Draw(SpriteBatch sb)
-        {
-            //empty
-        }
-
-        void Drawstring(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
-        {
-            sb.DrawString(UIfont, value.ToString(), stringPos, Color.White);
-        }
+        
 
         protected override void Initialize()
         {
@@ -51,13 +43,12 @@ namespace TowerDefenceINF.GameResources.Code
             graphics.PreferredBackBufferWidth = width;
             graphics.ApplyChanges();
             mapHandler = new MapHandler(graphics.GraphicsDevice);
-            //towerHandler = new TowerHandler(Content);
+            towerHandler = new TowerHandler(Content);
+            IsMouseVisible = true;
             //backBufferHandler = new BackBufferHandler(Content);
             //projectileHandler = new ProjectileHandler(Content);
             //enemyHandler = new EnemyHandler(Content);
             
-            UIfont = Content.Load<SpriteFont>("UI_font");
-
             int life = 10, cash = 25, wave = 1;
             player = new Player(life, cash, wave);
         }
@@ -65,12 +56,13 @@ namespace TowerDefenceINF.GameResources.Code
         protected override void UnloadContent()
         {
         }
-        
+
+        bool test = true;
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
+            towerHandler.Update(gameTime, ref test);
             base.Update(gameTime);
         }
         
@@ -80,8 +72,7 @@ namespace TowerDefenceINF.GameResources.Code
             spriteBatch.Begin();
 
             mapHandler.Draw(spriteBatch);
-            
-            Drawstring(spriteBatch, player.getLife(), new Vector2(100, 100));
+            towerHandler.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
