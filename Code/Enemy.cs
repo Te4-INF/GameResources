@@ -1,41 +1,35 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace TowerDefenceINF
 {
-
-    class Enemy
+    abstract class Enemy : Animated
     {
+        public Enemy(Texture2D tex, Vector2 pos)
+            : base(tex, pos)
+        {
+            direction = new Vector2(1, 0);
+            speed = new Vector2(5, 0);
+        }
 
-        //public Vector2 pos;
-        //public Texture2D tex;
+        public Vector2 Position
+        {
+            get
+            {
+                return pos;
+            }
+        }
 
-        //public Enemy(Texture2D tex, Vector2 pos)
-        //{
+        public override void Update(GameTime gameTime)
+        {
+            pos += direction * speed;
+        }
 
-        //    this.tex = tex;
-        //    this.pos = pos;
-
-        //}
-
-        //public void Update(GameTime gameTime)
-        //{
-
-        //    pos.X += 2;
-
-        //}
-
-        //public void Draw(SpriteBatch sb)
-        //{
-
-        //    sb.Draw(tex, pos, Color.Green);
-
-        //}
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(tex, pos, Color.White);
+        }
 
     }
 }
