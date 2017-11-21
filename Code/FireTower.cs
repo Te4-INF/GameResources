@@ -13,7 +13,7 @@ namespace TowerDefenceINF
         public FireTower(Texture2D tex, Vector2 pos) : base(tex, pos)
         {
 
-
+            price = 150;
 
         }
 

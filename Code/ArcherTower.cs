@@ -14,26 +14,34 @@ namespace TowerDefenceINF
         public ArcherTower(Texture2D tex, Vector2 pos) :base(tex, pos)
         {
 
-            
+            price = 100;
 
         }
 
         public override void Update(GameTime gameTime, List<Enemy> enemyList)
         {
                 
-            foreach(Enemy e in enemyList)
-            {
+            //foreach(Enemy e in enemyList)
+            //{
 
-                //om inom radie, skjut(väntar på kod från Carlo)
+            //    if (Vector2.Distance(pos, e.pos) < radius)
+            //    {
 
-            }
+            //        Console.WriteLine("ENEMY DETECTED");
+
+            //    }
+
+            //    else
+            //        Console.WriteLine("ENEMY NOT DETECTED");
+
+            //}
 
         }
 
         public override void Draw(SpriteBatch sb)
         {
 
-            sb.Draw(tex, pos, Color.White);
+            base.Draw(sb);
 
         }
     }
