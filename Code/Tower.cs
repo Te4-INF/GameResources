@@ -10,13 +10,13 @@ namespace TowerDefenceINF
 {
     abstract class Tower: GameObject
     {
-
-        protected Vector2 radius;
+        
+        protected int price, radius;
 
         public Tower(Texture2D tex, Vector2 pos): base(tex, pos)
         {
-            
-            radius = new Vector2(100, 100);
+
+            radius = 420;
 
         }
 
@@ -27,7 +27,12 @@ namespace TowerDefenceINF
 
         }
 
-        public abstract void Update(GameTime gameTime, List<Enemy> enemyList);
+        public virtual void Update(GameTime gameTime, List<Enemy> enemyList)
+        {
+
+            
+
+        }
 
         public virtual bool IsColliding(Rectangle other)
         {
@@ -39,7 +44,9 @@ namespace TowerDefenceINF
         public virtual bool PixelPerfectTowerCollision(Tower other)
         {
 
-            
+            if (boundingBox.Intersects(other.GetBoundingBox()))
+            {
+
                 Console.WriteLine("PRE-COLLISION");
 
 
@@ -69,13 +76,16 @@ namespace TowerDefenceINF
 
                         if (colorA.A != 0 && colorB.A != 0)
                         {
-                            
+
                             Console.WriteLine("COLLISION" + y);
                             return true;
 
                         }
                     }
                 }
+
+                return false;
+            }
 
                  return false;
             
