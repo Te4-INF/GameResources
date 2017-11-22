@@ -108,17 +108,17 @@ namespace TowerDefenceINF
 
                 bool testBool = false;
 
-                foreach(Tower t in towerList)
-                {
+                //foreach(Tower t in towerList)
+                //{
 
-                    if (mouseTower.GetBoundingBox().Intersects(t.GetBoundingBox()))
-                    {
+                //    if (mouseTower.GetBoundingBox().Intersects(t.GetBoundingBox()))
+                //    {
 
-                        testBool = mouseTower.PixelPerfectTowerCollision(t);
+                //        testBool = mouseTower.PixelPerfectTowerCollision(t);
 
-                    }
+                //    }
 
-                }
+                //}
                 if (testBool != true)
                 towerList.Add(mouseTower);
                 towerChoice = 4;
