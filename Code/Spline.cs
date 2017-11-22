@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TowerDefenceINF.GameResources.Code
 {
-   public class MasterHandler
+    class Spline: Maphandler
     {
+
     }
 }
