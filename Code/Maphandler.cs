@@ -14,10 +14,28 @@ namespace TowerDefenceINF.GameResources.Code
     class MapHandler
     {
         Spline currentMapSpline;
+        protected int map;
+        private bool mapIsLoaded;
+        private int totalNumberMaps;
         public MapHandler(GraphicsDevice graphics)
         {
+            totalNumberMaps = 1;
+            map = 1;
+            LoadMap(graphics);
+        }
+        public void Update(GameTime gameTime)
+        {
+           
+        }
+        public void LoadMap(GraphicsDevice graphics)
+        {
+            mapIsLoaded = false;
             currentMapSpline = new Spline(graphics);
-            ReadMap(@"Bana1.txt");
+            if (map > 0 && map <= totalNumberMaps)
+            {
+                ReadMap(@"Map" + map.ToString() + ".txt");
+                mapIsLoaded = true;
+            }
         }
         private void ReadMap(string mapName)
         {
@@ -35,7 +53,8 @@ namespace TowerDefenceINF.GameResources.Code
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            currentMapSpline.Draw(spriteBatch);
+            if (mapIsLoaded)
+                currentMapSpline.Draw(spriteBatch);
         }
     }
 }
