@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+
 namespace TowerDefenceINF
 {
     abstract class Enemy : Animated
@@ -29,5 +30,6 @@ namespace TowerDefenceINF
         {
             spriteBatch.Draw(tex, pos, Color.White);
         }
+
     }
 }
