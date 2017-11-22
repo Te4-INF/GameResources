@@ -55,6 +55,7 @@ namespace TowerDefenceINF.GameResources.Code
         int width = 1600;
         int hight = 900;
         Player player;
+        SpriteFont font;
         enum GameState
         {
             Meny,
@@ -85,6 +86,7 @@ namespace TowerDefenceINF.GameResources.Code
         
         protected override void LoadContent()
         {
+            font = Content.Load<SpriteFont>("Font");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             graphics.PreferredBackBufferHeight = hight;
             graphics.PreferredBackBufferWidth = width;
@@ -100,7 +102,6 @@ namespace TowerDefenceINF.GameResources.Code
             player = new Player(life, cash, wave);
         }
         
-
         bool test = true;
         protected override void Update(GameTime gameTime)
         {
@@ -114,11 +115,11 @@ namespace TowerDefenceINF.GameResources.Code
             else if(currentState == GameState.Play)
             {
                 //mapHandler.Update(gameTime);
-                //bufferHandler.Update();
+                //bufferHandler.Update(gameTime);
                 towerHandler.Update(gameTime, ref test);
-                //enemyHandler.Update();
-                //projectileHandler.Update();
-                //uIHandler.Update();
+                //enemyHandler.Update(gameTime);
+                //projectileHandler.Update(gameTime);
+                //uIHandler.Update(gameTime);
             }
             else if(currentState == GameState.Gameover)
             {
@@ -133,7 +134,8 @@ namespace TowerDefenceINF.GameResources.Code
             if (currentState == GameState.Meny)
             {
                 GraphicsDevice.Clear(Color.White);
-
+                spriteBatch.DrawString(font, "TD", new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 25), Color.Black);
+                spriteBatch.DrawString(font, "Start Press Escape", new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 5), Color.Black);
             }
             else if(currentState == GameState.Play)
             {
