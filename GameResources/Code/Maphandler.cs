@@ -33,7 +33,7 @@ namespace TowerDefenceINF.GameResources.Code
             currentMapSpline = new Spline(graphics);
             if (map > 0 && map <= totalNumberMaps)
             {
-                ReadMap(@"Map" + map.ToString() + ".txt");
+                ReadMap(@"..\..\TowerDefence\GameResources\Maps\Map" + map.ToString() + ".txt");
                 mapIsLoaded = true;
             }
         }
