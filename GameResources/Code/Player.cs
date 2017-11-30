@@ -14,9 +14,9 @@ namespace TowerDefenceINF.GameResources.Code
 
         public Player(int life, int cash, int wave) : base()
         {
-            this.life = life;
-            this.cash = cash;
-            this.wave = wave;
+            this.life = 10;
+            this.cash = 1000;
+            this.wave = 1;
         }
 
         public int getLife()

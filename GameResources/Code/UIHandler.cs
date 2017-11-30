@@ -11,6 +11,13 @@ namespace TowerDefenceINF.GameResources.Code
 {
   public class UIHandler
     {
+        SpriteFont UIfont;
+
+        public void loadFont(ContentManager content)
+        {
+            UIfont = content.Load<SpriteFont>("UI_font");
+        }
+
         void Drawstring(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
         {
             sb.DrawString(UIfont, value.ToString(), stringPos, Color.White);
