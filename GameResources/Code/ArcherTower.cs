@@ -20,21 +20,21 @@ namespace TowerDefenceINF
 
         public override void Update(GameTime gameTime, List<Enemy> enemyList)
         {
-                
-            //foreach(Enemy e in enemyList)
-            //{
 
-            //    if (Vector2.Distance(pos, e.pos) < radius)
-            //    {
+            foreach (Enemy e in enemyList)
+            {
 
-            //        Console.WriteLine("ENEMY DETECTED");
+                if (Vector2.Distance(pos, e.Position) < radius)
+                {
 
-            //    }
+                    Console.WriteLine("ENEMY DETECTED");
 
-            //    else
-            //        Console.WriteLine("ENEMY NOT DETECTED");
+                }
 
-            //}
+                else
+                    Console.WriteLine("ENEMY NOT DETECTED");
+
+            }
 
         }
 
