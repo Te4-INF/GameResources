@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace TowerDefenceINF.GameResources.Code
 {
-  public class UIHandler : MasterHandler
+  public class UIHandler
     {
-        
+        void Drawstring(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
+        {
+            sb.DrawString(UIfont, value.ToString(), stringPos, Color.White);
+        }
     }
 }
