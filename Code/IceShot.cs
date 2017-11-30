@@ -13,21 +13,8 @@ namespace TowerDefenceINF
 
         public IceShot(Texture2D texture, Vector2 pos) : base(texture, pos)
         {
+
             
-
-        }
-
-        public override void Update()
-        {
-
-
-
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-
-            spriteBatch.Draw(texture, pos, Color.Blue);
 
         }
     }

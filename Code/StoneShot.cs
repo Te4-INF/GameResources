@@ -15,18 +15,5 @@ namespace TowerDefenceINF
         {
 
         }
-
-        public override void Update()
-        {
-
-
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-
-            spriteBatch.Draw(texture, pos, Color.Gray);
-
-        }
     }
 }
