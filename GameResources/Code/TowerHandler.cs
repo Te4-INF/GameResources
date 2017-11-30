@@ -18,17 +18,19 @@ namespace TowerDefenceINF
         private int towerChoice;
         private Texture2D[] towerTextures;
         private Tower mouseTower;
+        private GraphicsDeviceManager graphics;
 
         Enemy testEnemy;
         List<Enemy> enemyList;
 
-        public TowerHandler(ContentManager content)
+        public TowerHandler(ContentManager content, GraphicsDeviceManager graphics)
         {
 
             towerList = new List<Tower>();
             towerTextures = new Texture2D[3];
             towerChoice = 4;
             towerTextures[0] = content.Load<Texture2D>("tower");
+            this.graphics = graphics;
 
             enemyList = new List<Enemy>();
             //testEnemy = new Enemy(towerTextures[0], new Vector2(100, 100));
@@ -36,7 +38,7 @@ namespace TowerDefenceINF
 
         }
 
-        public void Update(GameTime gameTime, ref bool test)
+        public void Update(GameTime gameTime, ref bool test, RenderTarget2D renderTarget)
         {
 
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
@@ -106,22 +108,16 @@ namespace TowerDefenceINF
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && towerChoice != 4)
             {
 
-                bool testBool = false;
+                bool testBool = PixelPerfectTowerCollision(renderTarget, mouseTower);
 
-                //foreach(Tower t in towerList)
-                //{
+                if (!testBool)
+                {
 
-                //    if (mouseTower.GetBoundingBox().Intersects(t.GetBoundingBox()))
-                //    {
+                    towerList.Add(mouseTower);
+                    towerChoice = 4;
 
-                //        testBool = mouseTower.PixelPerfectTowerCollision(t);
-
-                //    }
-
-                //}
-                if (testBool != true)
-                towerList.Add(mouseTower);
-                towerChoice = 4;
+                }
+                
 
             }
 
@@ -167,6 +163,48 @@ namespace TowerDefenceINF
            //     e.Draw(sb);
 
            // }
+
+        }
+
+        public virtual bool PixelPerfectTowerCollision(RenderTarget2D renderTarget, Tower mouseTower)
+        {
+
+            
+                Console.WriteLine("PRE-COLLISION");
+
+
+                Color[] dataA = new Color[mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height];
+                mouseTower.GetTexture().GetData<Color>(0, mouseTower.GetBoundingBox(), dataA, 0, mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height);
+
+                Color[] dataB = new Color[graphics.PreferredBackBufferWidth * graphics.PreferredBackBufferHeight];
+                renderTarget.GetData<Color>(0, mouseTower.GetBoundingBox(), dataB, 0, mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height);
+
+                //int top = Math.Max(mouseTower.GetBoundingBox().Top, other.GetBoundingBox().Top);
+                //int bottom = Math.Min(mouseTower.GetBoundingBox().Bottom, other.GetBoundingBox().Bottom);
+                //int left = Math.Max(mouseTower.GetBoundingBox().Left, other.GetBoundingBox().Left);
+                //int right = Math.Min(mouseTower.GetBoundingBox().Right, other.GetBoundingBox().Right);
+
+                for (int i = 0; i < dataA.Length; i++)
+                {
+
+                    for (int j = 0; j < dataB.Length; j++)
+                    {
+
+                        Color colorA = dataA[i];
+
+                        Color colorB = dataB[j];
+
+                        if (colorA.A != 0 && colorB.A != 0)
+                        {
+
+                            Console.WriteLine("COLLISION" + i);
+                            return true;
+
+                        }
+                    }
+                }
+
+                return false;
 
         }
 
