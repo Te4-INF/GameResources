@@ -19,14 +19,21 @@ namespace TowerDefenceINF.GameResources.Code
             simplePath.Clean();
         }
 
-        public void AddPoint(int x, int y)
+        public void AddPoint(int x, int y) // lägger till punkterna i splinen 
         {
             simplePath.AddPoint(new Vector2(x, y));
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch) //Ritar utt splinen
         {
             simplePath.Draw(spriteBatch);
+        }
+
+        public SimplePath GetSimplePath()
+        {
+
+            return simplePath;
+
         }
     }
 }
