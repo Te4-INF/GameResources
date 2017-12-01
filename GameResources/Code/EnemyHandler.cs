@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Spline;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class EnemyHandler
     {
