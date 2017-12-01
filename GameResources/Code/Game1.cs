@@ -49,14 +49,17 @@ namespace TowerDefenceINF.GameResources.Code
         
         MapHandler mapHandler;
         TowerHandler towerHandler;
-        BackBufferHandler bufferHandler;
+
+        BackBufferHandler backBufferHandler;
         ProjectileHandler projectileHandler;
         UIHandler uIHandler;
         EnemyHandler enemyHandler;
+
         int width = 1600;
         int hight = 900;
         SpriteFont font;
         SimplePath map;
+        bool mouseVisibility;
 
         enum GameState
         {
@@ -92,16 +95,18 @@ namespace TowerDefenceINF.GameResources.Code
             graphics.PreferredBackBufferHeight = hight;
             graphics.PreferredBackBufferWidth = width;
             graphics.ApplyChanges();
-            mapHandler = new MapHandler(graphics.GraphicsDevice, Content);
-            towerHandler = new TowerHandler(Content);
             mouseVisibility = true;
-            map = mapHandler.GetSimplePath();
-            //backBufferHandler = new BackBufferHandler(Content);
-            //projectileHandler = new ProjectileHandler(Content);
+
+            mapHandler = new MapHandler(graphics.GraphicsDevice, Content);
+            towerHandler = new TowerHandler(Content, graphics);
+            IsMouseVisible = true;
+            backBufferHandler = new BackBufferHandler(GraphicsDevice, Content);
+
+            projectileHandler = new ProjectileHandler(Content);
             //enemyHandler = new EnemyHandler(Content, SimplePath map);
         }
         
-        bool mouseVisibility = true;
+        
         protected override void Update(GameTime gameTime)
         {
             IsMouseVisible = mouseVisibility;
@@ -114,10 +119,14 @@ namespace TowerDefenceINF.GameResources.Code
             }
             else if(currentState == GameState.Play)
             {
-                //bufferHandler.Update(gameTime);
-                towerHandler.Update(gameTime, ref mouseVisibility);
+
+                //mapHandler.Update(gameTime);
+                
+                towerHandler.Update(gameTime, ref mouseVisibility, backBufferHandler.GetBackgroundLayer(), projectileHandler);
+                backBufferHandler.Update(GraphicsDevice, towerHandler.GetTowerList());
+
                 //enemyHandler.Update(gameTime);
-                //projectileHandler.Update(gameTime);
+                projectileHandler.Update(gameTime);
                 //uIHandler.Update(gameTime);
             }
             else if(currentState == GameState.Gameover)

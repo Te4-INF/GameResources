@@ -2,10 +2,14 @@
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     abstract class Enemy : Animated
     {
+        protected byte health, status;
+
+        protected Rectangle destinationRectangle, sourceRectangle;
+
         public Enemy(Texture2D tex, Vector2 pos)
             : base(tex, pos)
         {
@@ -23,12 +27,14 @@ namespace TowerDefenceINF
 
         public override void Update(GameTime gameTime)
         {
-            pos += direction * speed;
+            destinationRectangle.X += (int)(direction.X * speed.X);
+            destinationRectangle.Y += (int)(direction.Y * speed.Y);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, pos, Color.White);
+            spriteBatch.Draw(tex, destinationRectangle, sourceRectangle,
+                Color.White);
         }
 
     }

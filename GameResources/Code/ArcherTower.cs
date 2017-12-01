@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class ArcherTower : Tower
     {
@@ -18,23 +18,23 @@ namespace TowerDefenceINF
 
         }
 
-        public override void Update(GameTime gameTime, List<Enemy> enemyList)
+        public override void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
         {
-                
-            //foreach(Enemy e in enemyList)
-            //{
 
-            //    if (Vector2.Distance(pos, e.pos) < radius)
-            //    {
+            foreach (Enemy e in enemyList)
+            {
 
-            //        Console.WriteLine("ENEMY DETECTED");
+                if (Vector2.Distance(pos, e.GetPos()) < radius)
+                {
 
-            //    }
+                    Console.WriteLine("ENEMY DETECTED");
 
-            //    else
-            //        Console.WriteLine("ENEMY NOT DETECTED");
+                }
 
-            //}
+                else
+                    Console.WriteLine("ENEMY NOT DETECTED");
+
+            };
 
         }
 

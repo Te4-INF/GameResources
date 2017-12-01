@@ -7,9 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TowerDefenceINF.GameResources.Code;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class TowerHandler: MasterHandler
     {
@@ -18,17 +17,19 @@ namespace TowerDefenceINF
         private int towerChoice;
         private Texture2D[] towerTextures;
         private Tower mouseTower;
+        private GraphicsDeviceManager graphics;
 
         Enemy testEnemy;
         List<Enemy> enemyList;
 
-        public TowerHandler(ContentManager content)
+        public TowerHandler(ContentManager content, GraphicsDeviceManager graphics)
         {
 
             towerList = new List<Tower>();
             towerTextures = new Texture2D[3];
             towerChoice = 4;
             towerTextures[0] = content.Load<Texture2D>("tower");
+            this.graphics = graphics;
 
             enemyList = new List<Enemy>();
             //testEnemy = new Enemy(towerTextures[0], new Vector2(100, 100));
@@ -36,7 +37,7 @@ namespace TowerDefenceINF
 
         }
 
-        public void Update(GameTime gameTime, ref bool test)
+        public void Update(GameTime gameTime, ref bool test, RenderTarget2D renderTarget, ProjectileHandler projectileHandler)
         {
 
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
@@ -106,22 +107,16 @@ namespace TowerDefenceINF
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && towerChoice != 4)
             {
 
-                bool testBool = false;
+                bool testBool = PixelPerfectTowerCollision(renderTarget, mouseTower);
 
-                //foreach(Tower t in towerList)
-                //{
+                if (!testBool)
+                {
 
-                //    if (mouseTower.GetBoundingBox().Intersects(t.GetBoundingBox()))
-                //    {
+                    towerList.Add(mouseTower);
+                    towerChoice = 4;
 
-                //        testBool = mouseTower.PixelPerfectTowerCollision(t);
-
-                //    }
-
-                //}
-                if (testBool != true)
-                towerList.Add(mouseTower);
-                towerChoice = 4;
+                }
+                
 
             }
 
@@ -131,16 +126,9 @@ namespace TowerDefenceINF
             foreach (Tower t in towerList)
             {
 
-                t.Update(gameTime, enemyList);
+                t.Update(gameTime, enemyList, projectileHandler);
 
             }
-
-            //foreach (Enemy e in enemyList)
-            //{
-
-            //    e.Update(gameTime);
-
-            //}
 
         }
 
@@ -167,6 +155,59 @@ namespace TowerDefenceINF
            //     e.Draw(sb);
 
            // }
+
+        }
+
+        public virtual bool PixelPerfectTowerCollision(RenderTarget2D renderTarget, Tower mouseTower)
+        {
+
+                Color[] dataA = new Color[mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height];
+                mouseTower.GetTexture().GetData<Color>(dataA);
+
+                Color[] dataB = new Color[mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height];
+                renderTarget.GetData<Color>(0, mouseTower.GetBoundingBox(), dataB, 0, mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height);
+            
+
+                for (int i = 0; i < dataA.Length; i++)
+                {
+
+                    Color colorA = dataA[i];
+                    Color colorB = dataB[i];
+
+                    if (colorA.A >= 200 && colorB.A >= 200)
+                    {
+
+                        Console.WriteLine("COLLISION" + i);
+                        return true;
+
+                    }
+                
+                }
+
+            return false;
+
+        }
+
+        public List<Tower> GetTowerList()
+        {
+
+            return towerList;
+
+        }
+
+        public bool MouseInWindow()
+        {
+
+            bool tempBool = true;
+
+            if(mouseTower.GetPos().X < 0 && mouseTower.GetPos().X > (graphics.PreferredBackBufferWidth - mouseTower.GetTexture().Width))
+            {
+
+
+
+            }
+
+            return tempBool;
 
         }
 
