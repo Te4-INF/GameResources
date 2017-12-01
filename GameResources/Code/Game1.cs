@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TowerDefenceINF.GameResources.Code;
 using System.Collections.Generic;
+using Spline;
 
 namespace TowerDefenceINF.GameResources.Code
 {
@@ -48,14 +49,17 @@ namespace TowerDefenceINF.GameResources.Code
         
         MapHandler mapHandler;
         TowerHandler towerHandler;
-        BackBufferHandler backBufferHandler;
-        //ProjectileHandler projectileHandler;
-        //UIHandler uIHandler;
-        //EnemyHandler enemyHandler;
+
+        BackBufferHandler bufferHandler;
+        ProjectileHandler projectileHandler;
+        UIHandler uIHandler;
+        EnemyHandler enemyHandler;
+
         int width = 1600;
         int hight = 900;
-        Player player;
         SpriteFont font;
+        SimplePath map;
+
         enum GameState
         {
             Meny,
@@ -66,7 +70,7 @@ namespace TowerDefenceINF.GameResources.Code
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "GameResources/Content";
+            Content.RootDirectory = "Content";
         }
         
         protected override void Initialize()
@@ -81,7 +85,6 @@ namespace TowerDefenceINF.GameResources.Code
             {
                 currentState = GameState.Play;
             }
-            
         }
         
         protected override void LoadContent()
@@ -91,20 +94,20 @@ namespace TowerDefenceINF.GameResources.Code
             graphics.PreferredBackBufferHeight = hight;
             graphics.PreferredBackBufferWidth = width;
             graphics.ApplyChanges();
+
             mapHandler = new MapHandler(graphics.GraphicsDevice);
             towerHandler = new TowerHandler(Content, graphics);
             IsMouseVisible = true;
             backBufferHandler = new BackBufferHandler(GraphicsDevice, Content);
+
             //projectileHandler = new ProjectileHandler(Content);
-            //enemyHandler = new EnemyHandler(Content);
-            
-            int life = 10, cash = 25, wave = 1;
-            player = new Player(life, cash, wave);
+            //enemyHandler = new EnemyHandler(Content, SimplePath map);
         }
         
-        bool test = true;
+        bool mouseVisibility = true;
         protected override void Update(GameTime gameTime)
         {
+            IsMouseVisible = mouseVisibility;
             KeyMouseReader.Update();
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
@@ -114,10 +117,12 @@ namespace TowerDefenceINF.GameResources.Code
             }
             else if(currentState == GameState.Play)
             {
+
                 //mapHandler.Update(gameTime);
                 
                 towerHandler.Update(gameTime, ref test, backBufferHandler.GetBackgroundLayer());
                 backBufferHandler.Update(GraphicsDevice, towerHandler.GetTowerList());
+
                 //enemyHandler.Update(gameTime);
                 //projectileHandler.Update(gameTime);
                 //uIHandler.Update(gameTime);
@@ -136,13 +141,13 @@ namespace TowerDefenceINF.GameResources.Code
             {
                 GraphicsDevice.Clear(Color.White);
                 spriteBatch.DrawString(font, "TD", new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 25), Color.Black);
-                spriteBatch.DrawString(font, "Start Press Escape", new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 5), Color.Black);
+                spriteBatch.DrawString(font, "Start Press Enter", new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 5), Color.Black);
             }
             else if(currentState == GameState.Play)
             {
                 GraphicsDevice.Clear(Color.Blue);
                 mapHandler.Draw(spriteBatch);
-                towerHandler.Draw(spriteBatch);
+                //towerHandler.Draw(spriteBatch);
                 //enemyHandler.Draw(spriteBatch);
                 //projectileHandler.Draw(spriteBatch);
                 //uIHandler.Draw(spriteBatch);
