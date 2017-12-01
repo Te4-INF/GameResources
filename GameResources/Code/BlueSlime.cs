@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Spline;
 
 namespace TowerDefenceINF
 {
@@ -7,12 +8,12 @@ namespace TowerDefenceINF
     {
         Rectangle[] moveRectangles;
 
-        public BlueSlime(Texture2D tex, Vector2 pos)
+        public BlueSlime(Texture2D tex, Vector2 pos, SimplePath simplePath)
             : base(tex, pos)
         {
-            health = 1;
+            health = 50;
 
-            destinationRectangle = new Rectangle(50, 100, 36, 36);
+            destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 36, 36);
             sourceRectangle = new Rectangle(10, 81, 12, 15);
 
             frameInterval = 100;
@@ -29,10 +30,14 @@ namespace TowerDefenceINF
             moveRectangles[7] = new Rectangle(234, 88, 12, 8);
             moveRectangles[8] = new Rectangle(265, 89, 14, 7);
             moveRectangles[9] = new Rectangle(298, 87, 12, 9);
+
+            this.simplePath = simplePath;
         }
 
         public override void Update(GameTime gameTime)
         {
+            texturePosition += 2;
+
             frameTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (frameTimer <= 0)
             {

@@ -1,12 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using Spline;
 
 namespace TowerDefenceINF
 {
     abstract class Enemy : Animated
     {
         protected byte health, status;
+
+        protected float texturePosition;
+
+        protected SimplePath simplePath;
 
         protected Rectangle destinationRectangle, sourceRectangle;
 
@@ -27,14 +31,13 @@ namespace TowerDefenceINF
 
         public override void Update(GameTime gameTime)
         {
-            destinationRectangle.X += (int)(direction.X * speed.X);
-            destinationRectangle.Y += (int)(direction.Y * speed.Y);
+            texturePosition++;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, destinationRectangle, sourceRectangle,
-                Color.White);
+            spriteBatch.Draw(tex, simplePath.GetPos(texturePosition), sourceRectangle,
+                Color.White, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
         }
 
     }

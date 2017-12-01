@@ -19,13 +19,17 @@ namespace TowerDefenceINF
         List<Enemy> enemyList;
         Enemy tempEnemy;
 
+        SimplePath simplePath;
+
         public EnemyHandler(ContentManager content, SimplePath simplePath)
         {
             spriteSheet = content.Load<Texture2D>("slimeSheet");
 
-            position = Vector2.Zero;
+            position = simplePath.GetPos(0);
 
             enemyList = new List<Enemy>();
+
+            this.simplePath = simplePath;
         }
 
         public void Update(GameTime gameTime)
@@ -33,7 +37,7 @@ namespace TowerDefenceINF
             spawnTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (spawnTimer <= 0)
             {
-                tempEnemy = new BlueSlime(spriteSheet, position);
+                tempEnemy = new BlueSlime(spriteSheet, position, simplePath);
                 enemyList.Add(tempEnemy);
 
                 spawnTimer = spawnInterval;
