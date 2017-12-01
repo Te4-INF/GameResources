@@ -50,7 +50,7 @@ namespace TowerDefenceINF.GameResources.Code
         MapHandler mapHandler;
         TowerHandler towerHandler;
 
-        BackBufferHandler bufferHandler;
+        BackBufferHandler backBufferHandler;
         ProjectileHandler projectileHandler;
         UIHandler uIHandler;
         EnemyHandler enemyHandler;
@@ -59,6 +59,7 @@ namespace TowerDefenceINF.GameResources.Code
         int hight = 900;
         SpriteFont font;
         SimplePath map;
+        bool mouseVisibility;
 
         enum GameState
         {
@@ -70,7 +71,7 @@ namespace TowerDefenceINF.GameResources.Code
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "GameResources/Content";
         }
         
         protected override void Initialize()
@@ -94,17 +95,18 @@ namespace TowerDefenceINF.GameResources.Code
             graphics.PreferredBackBufferHeight = hight;
             graphics.PreferredBackBufferWidth = width;
             graphics.ApplyChanges();
+            mouseVisibility = true;
 
-            mapHandler = new MapHandler(graphics.GraphicsDevice);
+            mapHandler = new MapHandler(graphics.GraphicsDevice, Content);
             towerHandler = new TowerHandler(Content, graphics);
             IsMouseVisible = true;
             backBufferHandler = new BackBufferHandler(GraphicsDevice, Content);
 
-            //projectileHandler = new ProjectileHandler(Content);
+            projectileHandler = new ProjectileHandler(Content);
             //enemyHandler = new EnemyHandler(Content, SimplePath map);
         }
         
-        bool mouseVisibility = true;
+        
         protected override void Update(GameTime gameTime)
         {
             IsMouseVisible = mouseVisibility;
@@ -120,11 +122,11 @@ namespace TowerDefenceINF.GameResources.Code
 
                 //mapHandler.Update(gameTime);
                 
-                towerHandler.Update(gameTime, ref test, backBufferHandler.GetBackgroundLayer());
+                towerHandler.Update(gameTime, ref mouseVisibility, backBufferHandler.GetBackgroundLayer());
                 backBufferHandler.Update(GraphicsDevice, towerHandler.GetTowerList());
 
                 //enemyHandler.Update(gameTime);
-                //projectileHandler.Update(gameTime);
+                projectileHandler.Update(gameTime);
                 //uIHandler.Update(gameTime);
             }
             else if(currentState == GameState.Gameover)
@@ -147,7 +149,7 @@ namespace TowerDefenceINF.GameResources.Code
             {
                 GraphicsDevice.Clear(Color.Blue);
                 mapHandler.Draw(spriteBatch);
-                //towerHandler.Draw(spriteBatch);
+                towerHandler.Draw(spriteBatch);
                 //enemyHandler.Draw(spriteBatch);
                 //projectileHandler.Draw(spriteBatch);
                 //uIHandler.Draw(spriteBatch);
