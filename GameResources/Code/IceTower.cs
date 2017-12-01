@@ -26,7 +26,8 @@ namespace TowerDefenceINF.GameResources.Code
         //        if (Vector2.Distance(pos, e.GetPos()) < radius)
         //        {
 
-        //            projectileHandler.IceShoot(pos, ref e);
+
+                    //projectileHandler.IceShoot(pos, e);
 
         //        }
 
