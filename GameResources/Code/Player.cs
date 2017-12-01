@@ -23,5 +23,20 @@ namespace TowerDefenceINF.GameResources.Code
         {
             return life;
         }
+
+        public void setLife(int newLife)
+        {
+            this.life = newLife;
+        }
+
+        public void setCash(int newCash)
+        {
+            this.cash = newCash;
+        }
+
+        public void setWave(int newWave)
+        {
+            this.wave = newWave;
+        }
     }
 }
