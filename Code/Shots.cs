@@ -34,7 +34,7 @@ namespace TowerDefenceINF
         public virtual void Draw(SpriteBatch spriteBatch)
         {
 
-
+          
 
         }
 

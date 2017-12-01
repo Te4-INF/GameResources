@@ -43,7 +43,7 @@ namespace TowerDefenceINF.GameResources.Code
             foreach(Shots s in ShotsList)
             {
 
-                s.Update(gameTime);
+                s.Update(gameTime, e);
 
             }
 
