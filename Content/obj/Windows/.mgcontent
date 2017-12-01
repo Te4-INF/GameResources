@@ -4,9 +4,9 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/TBTE4HP12/source/repos/TowerDefenceINF/TowerDefenceINF/TowerDefence/GameResources/Content/meh.png</File>
-    <File>C:/Users/TBTE4HP12/source/repos/TowerDefenceINF/TowerDefenceINF/TowerDefence/GameResources/Content/slimeSheet.png</File>
-    <File>C:/Users/TBTE4HP12/source/repos/TowerDefenceINF/TowerDefenceINF/TowerDefence/GameResources/Content/tower.png</File>
-    <File>C:/Users/TBTE4HP12/source/repos/TowerDefenceINF/TowerDefenceINF/TowerDefence/GameResources/Content/Font.spritefont</File>
+    <File>C:/Users/TBTE4HP01/source/repos/TowerDefenceINF/TowerDefence/GameResources/Content/meh.png</File>
+    <File>C:/Users/TBTE4HP01/source/repos/TowerDefenceINF/TowerDefence/GameResources/Content/slimeSheet.png</File>
+    <File>C:/Users/TBTE4HP01/source/repos/TowerDefenceINF/TowerDefence/GameResources/Content/tower.png</File>
+    <File>C:/Users/TBTE4HP01/source/repos/TowerDefenceINF/TowerDefence/GameResources/Content/Font.spritefont</File>
   </SourceFiles>
 </SourceFileCollection>
