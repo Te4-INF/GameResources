@@ -2,12 +2,15 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Spline;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class EnemyHandler
     {
-        float frameTimer, frameInterval = 100;
+        byte i;
+
+        float spawnTimer, spawnInterval = 900;
 
         Texture2D spriteSheet;
 
@@ -16,24 +19,24 @@ namespace TowerDefenceINF
         List<Enemy> enemyList;
         Enemy tempEnemy;
 
-        public EnemyHandler(ContentManager content)
+        public EnemyHandler(ContentManager content, SimplePath simplePath)
         {
             spriteSheet = content.Load<Texture2D>("slimeSheet");
 
-            position = new Vector2(50, 50);
+            position = Vector2.Zero;
 
             enemyList = new List<Enemy>();
         }
 
         public void Update(GameTime gameTime)
         {
-            frameTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (frameTimer <= 0)
+            spawnTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (spawnTimer <= 0)
             {
                 tempEnemy = new BlueSlime(spriteSheet, position);
                 enemyList.Add(tempEnemy);
 
-                frameTimer = frameInterval;
+                spawnTimer = spawnInterval;
             }
 
             foreach (Enemy enemy in enemyList)

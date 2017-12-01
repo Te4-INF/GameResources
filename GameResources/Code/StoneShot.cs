@@ -6,26 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class StoneShot: Shots
     {
 
         public StoneShot(Texture2D texture, Vector2 pos) : base(texture, pos)
         {
-
-        }
-
-        public override void Update()
-        {
-
-
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-
-            spriteBatch.Draw(texture, pos, Color.Gray);
 
         }
     }
