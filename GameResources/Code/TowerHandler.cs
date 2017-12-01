@@ -37,7 +37,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         }
 
-        public void Update(GameTime gameTime, ref bool test, RenderTarget2D renderTarget)
+        public void Update(GameTime gameTime, ref bool test, RenderTarget2D renderTarget, ProjectileHandler projectileHandler)
         {
 
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
@@ -126,7 +126,7 @@ namespace TowerDefenceINF.GameResources.Code
             foreach (Tower t in towerList)
             {
 
-                t.Update(gameTime, enemyList);
+                t.Update(gameTime, enemyList, projectileHandler);
 
             }
 

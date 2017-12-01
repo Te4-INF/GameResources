@@ -27,7 +27,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         }
 
-        public virtual void Update(GameTime gameTime, List<Enemy> enemyList)
+        public virtual void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
         {
 
             

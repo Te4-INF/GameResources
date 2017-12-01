@@ -24,9 +24,11 @@ namespace TowerDefenceINF.GameResources.Code
 
         }
 
-        public virtual void Update(GameTime gameTime, Enemy e)
-        {            
-            dirr = e.GetPos() - towerPos;
+        public virtual void Update(GameTime gameTime)
+        {
+            dirr = -towerPos;
+            dirr.Normalize();
+            //dirr = e.GetPos() - towerPos;
             pos += dirr * 2;
 
         }
