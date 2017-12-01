@@ -40,9 +40,6 @@ namespace TowerDefenceINF
             return boundingBox.Intersects(other);
 
         }
-
-
-        
         
     }
 }

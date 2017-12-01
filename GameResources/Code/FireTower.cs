@@ -23,7 +23,7 @@ namespace TowerDefenceINF
             foreach (Enemy e in enemyList)
             {
 
-                if (Vector2.Distance(pos, e.Position) < radius)
+                if (Vector2.Distance(pos, e.GetPos()) < radius)
                 {
 
                     Console.WriteLine("ENEMY DETECTED");
