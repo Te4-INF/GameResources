@@ -17,7 +17,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         }
 
-        public override void Update(GameTime gameTime, List<Enemy> enemyList)
+        public override void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
         {
 
             foreach (Enemy e in enemyList)

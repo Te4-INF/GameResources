@@ -37,13 +37,13 @@ namespace TowerDefenceINF.GameResources.Code
 
 
 
-        public void Update(GameTime gameTime, ref Enemy e)
+        public void Update(GameTime gameTime)
         {
 
             foreach(Shots s in ShotsList)
             {
 
-                s.Update(gameTime, e);
+                s.Update(gameTime);
 
             }
 
@@ -54,21 +54,21 @@ namespace TowerDefenceINF.GameResources.Code
             shots.Draw(spriteBatch);
         }
 
-        public void ArrowShoot(Vector2 towerPos, ref Enemy e)
+        public void ArrowShoot(Vector2 towerPos, Enemy e)
         {
 
             ShotsList.Add(new StoneShot(StoneShotTex, towerPos));
 
         }
 
-        public void FireShoot(Vector2 towerPos, ref Enemy e)
+        public void FireShoot(Vector2 towerPos, Enemy e)
         {
 
             ShotsList.Add(new FireShot(fireShotTex, towerPos));
 
         }
 
-        public void IceShoot(Vector2 towerPos, ref Enemy e)
+        public void IceShoot(Vector2 towerPos, Enemy e)
         {
 
             ShotsList.Add(new IceShot(iceShotTex, towerPos));
