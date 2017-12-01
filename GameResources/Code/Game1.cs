@@ -49,10 +49,12 @@ namespace TowerDefenceINF.GameResources.Code
         
         MapHandler mapHandler;
         TowerHandler towerHandler;
+
         BackBufferHandler bufferHandler;
         ProjectileHandler projectileHandler;
         UIHandler uIHandler;
         EnemyHandler enemyHandler;
+
         int width = 1600;
         int hight = 900;
         SpriteFont font;
@@ -92,11 +94,12 @@ namespace TowerDefenceINF.GameResources.Code
             graphics.PreferredBackBufferHeight = hight;
             graphics.PreferredBackBufferWidth = width;
             graphics.ApplyChanges();
-            mapHandler = new MapHandler(graphics.GraphicsDevice, Content);
-            //towerHandler = new TowerHandler(Content);
-            mouseVisibility = true;
-            map = mapHandler.GetSimplePath();
-            //backBufferHandler = new BackBufferHandler(Content);
+
+            mapHandler = new MapHandler(graphics.GraphicsDevice);
+            towerHandler = new TowerHandler(Content, graphics);
+            IsMouseVisible = true;
+            backBufferHandler = new BackBufferHandler(GraphicsDevice, Content);
+
             //projectileHandler = new ProjectileHandler(Content);
             //enemyHandler = new EnemyHandler(Content, SimplePath map);
         }
@@ -114,8 +117,12 @@ namespace TowerDefenceINF.GameResources.Code
             }
             else if(currentState == GameState.Play)
             {
-                //bufferHandler.Update(gameTime);
-              //  towerHandler.Update(gameTime, ref mouseVisibility);
+
+                //mapHandler.Update(gameTime);
+                
+                towerHandler.Update(gameTime, ref test, backBufferHandler.GetBackgroundLayer());
+                backBufferHandler.Update(GraphicsDevice, towerHandler.GetTowerList());
+
                 //enemyHandler.Update(gameTime);
                 //projectileHandler.Update(gameTime);
                 //uIHandler.Update(gameTime);

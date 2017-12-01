@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class IceTower : Tower
     {
@@ -17,25 +17,26 @@ namespace TowerDefenceINF
 
         }
 
-        public override void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
-        {
+        //public override void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
+        //{
 
-            foreach (Enemy e in enemyList)
-            {
+        //    foreach (Enemy e in enemyList)
+        //    {
 
-                if (Vector2.Distance(pos, e.GetPos()) < radius)
-                {
+        //        if (Vector2.Distance(pos, e.GetPos()) < radius)
+        //        {
 
-                    projectileHandler.IceShoot(pos, e);
 
-                }
+                    //projectileHandler.IceShoot(pos, e);
 
-                else
-                    Console.WriteLine("ENEMY NOT DETECTED");
+        //        }
 
-            }
+        //        else
+        //            Console.WriteLine("ENEMY NOT DETECTED");
 
-        }
+        //    }
+
+        //}
 
         public override void Draw(SpriteBatch sb)
         {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     abstract class Animated : GameObject
     {

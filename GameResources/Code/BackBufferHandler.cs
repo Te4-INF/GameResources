@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TowerDefenceINF;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class BackBufferHandler
     {
@@ -16,13 +16,13 @@ namespace TowerDefenceINF
 
         Texture2D mapTexture;
 
-        public BackBufferHandler(List<Tower> towerList, GraphicsDevice graphicsDevice, ContentManager content)
+        public BackBufferHandler(GraphicsDevice graphicsDevice, ContentManager content)
         {
             mapTexture = content.Load<Texture2D>("meh");
             backgroundLayer = new RenderTarget2D(graphicsDevice, 1600, 900);
         }
 
-        private void Update(GraphicsDevice device, List<Tower> towerList)
+        public void Update(GraphicsDevice device, List<Tower> towerList)
         {
             SpriteBatch sb = new SpriteBatch(device);
             
@@ -37,8 +37,10 @@ namespace TowerDefenceINF
             foreach (Tower t in towerList)
             {
                 t.Draw(sb);
-                sb.Draw(mapTexture, new Vector2(0, 0), Color.White);
+                
             }
+
+            sb.Draw(mapTexture, new Vector2(0, 0), Color.White);
 
             sb.End();
 

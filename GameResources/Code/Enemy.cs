@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     abstract class Enemy : Animated
     {
