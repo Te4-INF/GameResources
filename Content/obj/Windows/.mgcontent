@@ -4,9 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/TBTE4HP01/source/repos/TowerDefenceINF/TowerDefence/GameResources/Content/meh.png</File>
-    <File>C:/Users/TBTE4HP01/source/repos/TowerDefenceINF/TowerDefence/GameResources/Content/slimeSheet.png</File>
-    <File>C:/Users/TBTE4HP01/source/repos/TowerDefenceINF/TowerDefence/GameResources/Content/tower.png</File>
-    <File>C:/Users/TBTE4HP01/source/repos/TowerDefenceINF/TowerDefence/GameResources/Content/Font.spritefont</File>
+    <File>C:/Users/TBTE4HP06/Desktop/TowerDefence-master/TowerDefence/GameResources/Content/meh.png</File>
+    <File>C:/Users/TBTE4HP06/Desktop/TowerDefence-master/TowerDefence/GameResources/Content/slimeSheet.png</File>
+    <File>C:/Users/TBTE4HP06/Desktop/TowerDefence-master/TowerDefence/GameResources/Content/tower.png</File>
+    <File>C:/Users/TBTE4HP06/Desktop/TowerDefence-master/TowerDefence/GameResources/Content/Font.spritefont</File>
+    <File>C:/Users/TBTE4HP06/Desktop/TowerDefence-master/TowerDefence/GameResources/Content/FireShot.png</File>
+    <File>C:/Users/TBTE4HP06/Desktop/TowerDefence-master/TowerDefence/GameResources/Content/IceShot.png</File>
+    <File>C:/Users/TBTE4HP06/Desktop/TowerDefence-master/TowerDefence/GameResources/Content/StoneShot.png</File>
   </SourceFiles>
 </SourceFileCollection>

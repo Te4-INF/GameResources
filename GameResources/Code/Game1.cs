@@ -71,7 +71,7 @@ namespace TowerDefenceINF.GameResources.Code
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "GameResources/Content";
+            Content.RootDirectory = "Content";
         }
         
         protected override void Initialize()
@@ -122,7 +122,7 @@ namespace TowerDefenceINF.GameResources.Code
 
                 //mapHandler.Update(gameTime);
                 
-                towerHandler.Update(gameTime, ref mouseVisibility, backBufferHandler.GetBackgroundLayer());
+                towerHandler.Update(gameTime, ref mouseVisibility, backBufferHandler.GetBackgroundLayer(), projectileHandler);
                 backBufferHandler.Update(GraphicsDevice, towerHandler.GetTowerList());
 
                 //enemyHandler.Update(gameTime);

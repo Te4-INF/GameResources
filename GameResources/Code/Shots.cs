@@ -6,35 +6,51 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class Shots
     {
         protected Texture2D texture;
-        protected Vector2 pos;
-        protected Rectangle boundingBox;
 
+        protected Vector2 pos, dirr, towerPos;
+
+        protected Rectangle boundingBox;
 
         public Shots(Texture2D texture, Vector2 pos)
         {
             this.texture = texture;
             this.pos = pos;
-            this.boundingBox = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
-
+            boundingBox = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
 
         }
 
-        public virtual void Update()
+        public virtual void Update(GameTime gameTime)
         {
-
-
+            dirr = -towerPos;
+            dirr.Normalize();
+            //dirr = e.GetPos() - towerPos;
+            pos += dirr * 2;
 
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
 
+          //if()
+          //  {
+          //      spriteBatch.Draw(texture, pos, Color.Red);
+          //  }
 
+          //if()
+          //  {
+          //      spriteBatch.Draw(texture, pos, Color.Blue);
+          //  }
+
+          //if()
+          //  {
+          //      spriteBatch.Draw(texture, pos, Color.Gray);
+          //  }
+           
         }
 
     }
