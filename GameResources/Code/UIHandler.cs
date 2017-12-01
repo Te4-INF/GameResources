@@ -18,7 +18,7 @@ namespace TowerDefenceINF.GameResources.Code
             UIfont = content.Load<SpriteFont>("UI_font");
         }
 
-        public void Drawstring(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
+        public void Update(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
         {
             sb.DrawString(UIfont, value.ToString(), stringPos, Color.White);
         }
