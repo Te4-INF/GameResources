@@ -7,9 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TowerDefenceINF.GameResources.Code;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class TowerHandler: MasterHandler
     {
@@ -131,13 +130,6 @@ namespace TowerDefenceINF
 
             }
 
-            //foreach (Enemy e in enemyList)
-            //{
-
-            //    e.Update(gameTime);
-
-            //}
-
         }
 
         public void Draw(SpriteBatch sb)
@@ -169,42 +161,53 @@ namespace TowerDefenceINF
         public virtual bool PixelPerfectTowerCollision(RenderTarget2D renderTarget, Tower mouseTower)
         {
 
-            
-                Console.WriteLine("PRE-COLLISION");
-
-
                 Color[] dataA = new Color[mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height];
-                mouseTower.GetTexture().GetData<Color>(0, mouseTower.GetBoundingBox(), dataA, 0, mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height);
+                mouseTower.GetTexture().GetData<Color>(dataA);
 
-                Color[] dataB = new Color[graphics.PreferredBackBufferWidth * graphics.PreferredBackBufferHeight];
+                Color[] dataB = new Color[mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height];
                 renderTarget.GetData<Color>(0, mouseTower.GetBoundingBox(), dataB, 0, mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height);
-
-                //int top = Math.Max(mouseTower.GetBoundingBox().Top, other.GetBoundingBox().Top);
-                //int bottom = Math.Min(mouseTower.GetBoundingBox().Bottom, other.GetBoundingBox().Bottom);
-                //int left = Math.Max(mouseTower.GetBoundingBox().Left, other.GetBoundingBox().Left);
-                //int right = Math.Min(mouseTower.GetBoundingBox().Right, other.GetBoundingBox().Right);
+            
 
                 for (int i = 0; i < dataA.Length; i++)
                 {
 
-                    for (int j = 0; j < dataB.Length; j++)
+                    Color colorA = dataA[i];
+                    Color colorB = dataB[i];
+
+                    if (colorA.A >= 200 && colorB.A >= 200)
                     {
 
-                        Color colorA = dataA[i];
+                        Console.WriteLine("COLLISION" + i);
+                        return true;
 
-                        Color colorB = dataB[j];
-
-                        if (colorA.A != 0 && colorB.A != 0)
-                        {
-
-                            Console.WriteLine("COLLISION" + i);
-                            return true;
-
-                        }
                     }
+                
                 }
 
-                return false;
+            return false;
+
+        }
+
+        public List<Tower> GetTowerList()
+        {
+
+            return towerList;
+
+        }
+
+        public bool MouseInWindow()
+        {
+
+            bool tempBool = true;
+
+            if(mouseTower.GetPos().X < 0 && mouseTower.GetPos().X > (graphics.PreferredBackBufferWidth - mouseTower.GetTexture().Width))
+            {
+
+
+
+            }
+
+            return tempBool;
 
         }
 
