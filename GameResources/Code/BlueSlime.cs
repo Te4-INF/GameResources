@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Spline;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class BlueSlime : Enemy
     {
