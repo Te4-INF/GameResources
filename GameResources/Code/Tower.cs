@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     abstract class Tower: GameObject
     {
@@ -27,7 +27,7 @@ namespace TowerDefenceINF
 
         }
 
-        public virtual void Update(GameTime gameTime, List<Enemy> enemyList)
+        public virtual void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
         {
 
             
@@ -40,9 +40,6 @@ namespace TowerDefenceINF
             return boundingBox.Intersects(other);
 
         }
-
-
-        
         
     }
 }

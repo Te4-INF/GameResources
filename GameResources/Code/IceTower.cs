@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TowerDefenceINF
+namespace TowerDefenceINF.GameResources.Code
 {
     class IceTower : Tower
     {
@@ -17,16 +17,17 @@ namespace TowerDefenceINF
 
         }
 
-        public override void Update(GameTime gameTime, List<Enemy> enemyList)
+        public override void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
         {
 
-            foreach(Enemy e in enemyList)
+            foreach (Enemy e in enemyList)
             {
 
-                if (Vector2.Distance(pos, e.Position) < radius)
+                if (Vector2.Distance(pos, e.GetPos()) < radius)
                 {
 
-                    Console.WriteLine("ENEMY DETECTED");
+
+                    projectileHandler.IceShoot(pos, e);
 
                 }
 
