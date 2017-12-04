@@ -33,6 +33,15 @@ namespace TowerDefenceINF.GameResources.Code
 
         }
 
+        public Vector2 shotsPos
+        {
+            get
+            {
+                return pos;
+            }
+
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
 
