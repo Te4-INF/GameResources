@@ -20,19 +20,24 @@ namespace TowerDefenceINF.GameResources.Code
         List<Enemy> enemyList;
         Enemy tempEnemy;
 
+        List<Shots> shotsList;
+
         SimplePath simplePath;
 
         int dummyHealth, dummyBalance, dummyWave;
 
         float radius = 8;
 
-        public EnemyHandler(ContentManager content, SimplePath simplePath)
+        public EnemyHandler(ContentManager content, SimplePath simplePath,
+            List<Shots> shotsList)
         {
             spriteSheet = content.Load<Texture2D>("slimeSheet");
 
             position = simplePath.GetPos(0);
 
             enemyList = new List<Enemy>();
+
+            shotsList = new List<Shots>();
 
             this.simplePath = simplePath;
 
@@ -70,8 +75,12 @@ namespace TowerDefenceINF.GameResources.Code
 
             foreach (Enemy enemy in enemyList)
             {
-                //foreach (Shots shot in ShotsList)
-                //{
+                foreach (Shots shot in shotsList)
+                {
+                //    if (shot is FireShot)
+                //    {
+                //        if ()
+                //    }
                 //    if (Vector2.Distance(enemy.Position, shot.Position) < (radius + shot.Radius))
                 //    {
                 //        if (shot is FireShot)
@@ -87,7 +96,7 @@ namespace TowerDefenceINF.GameResources.Code
 
                 //        }
                 //    }
-                //}
+                }
 
                 enemy.Update(gameTime);
 
