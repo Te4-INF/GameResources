@@ -19,7 +19,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         //Shots[] shots = new Shots[3];
 
-        List<Shots> ShotsList = new List<Shots>();
+        List<Shots> shotsList = new List<Shots>();
 
         public ProjectileHandler(ContentManager content)
         {
@@ -40,7 +40,7 @@ namespace TowerDefenceINF.GameResources.Code
         public void Update(GameTime gameTime)
         {
 
-            foreach(Shots s in ShotsList)
+            foreach(Shots s in shotsList)
             {
 
                 s.Update(gameTime);
@@ -57,22 +57,30 @@ namespace TowerDefenceINF.GameResources.Code
         public void ArrowShoot(Vector2 towerPos, Enemy e)
         {
 
-            ShotsList.Add(new StoneShot(StoneShotTex, towerPos));
+            shotsList.Add(new StoneShot(StoneShotTex, towerPos));
 
         }
 
         public void FireShoot(Vector2 towerPos, Enemy e)
         {
 
-            ShotsList.Add(new FireShot(fireShotTex, towerPos));
+            shotsList.Add(new FireShot(fireShotTex, towerPos));
 
         }
 
         public void IceShoot(Vector2 towerPos, Enemy e)
         {
 
-            ShotsList.Add(new IceShot(iceShotTex, towerPos));
+            shotsList.Add(new IceShot(iceShotTex, towerPos));
 
+        }
+
+        public List<Shots> ShotsList
+        {
+            get
+            {
+                return shotsList;
+            }
         }
 
     }
