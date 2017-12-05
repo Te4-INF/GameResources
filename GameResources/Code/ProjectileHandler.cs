@@ -17,8 +17,6 @@ namespace TowerDefenceINF.GameResources.Code
 
         Shots shots;
 
-        //Shots[] shots = new Shots[3];
-
         List<Shots> shotsList = new List<Shots>();
 
         public ProjectileHandler(ContentManager content)
@@ -27,20 +25,33 @@ namespace TowerDefenceINF.GameResources.Code
             iceShotTex = content.Load<Texture2D>("IceShot");
             StoneShotTex = content.Load<Texture2D>("StoneShot");
 
-            //shots[0] = new FireShot(fireShotTex, new Vector2(100, 100)/*ska vara tornets position här iställett för den befintliga positionen*/);
+        }
 
-            //shots[1] = new IceShot(iceShotTex, new Vector2(100, 100)/*ska vara tornets position här iställett för den befintliga positionen*/);
+        public void ArrowShoot(Vector2 towerPos, Enemy e)
+        {
 
-            //shots[2] = new StoneShot(StoneShotTex, new Vector2(100, 100)/*ska vara tornets position här iställett för den befintliga positionen*/);
+            shotsList.Add(new StoneShot(StoneShotTex, towerPos, e));
 
         }
 
+        public void FireShoot(Vector2 towerPos, Enemy e)
+        {
 
+            shotsList.Add(new FireShot(fireShotTex, towerPos, e));
+
+        }
+
+        public void IceShoot(Vector2 towerPos, Enemy e)
+        {
+
+            shotsList.Add(new IceShot(iceShotTex, towerPos, e));
+
+        }
 
         public void Update(GameTime gameTime)
         {
 
-            foreach(Shots s in shotsList)
+            foreach (Shots s in shotsList)
             {
 
                 s.Update(gameTime);
@@ -51,28 +62,10 @@ namespace TowerDefenceINF.GameResources.Code
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            shots.Draw(spriteBatch);
-        }
-
-        public void ArrowShoot(Vector2 towerPos, Enemy e)
-        {
-
-            shotsList.Add(new StoneShot(StoneShotTex, towerPos));
-
-        }
-
-        public void FireShoot(Vector2 towerPos, Enemy e)
-        {
-
-            shotsList.Add(new FireShot(fireShotTex, towerPos));
-
-        }
-
-        public void IceShoot(Vector2 towerPos, Enemy e)
-        {
-
-            shotsList.Add(new IceShot(iceShotTex, towerPos));
-
+            foreach (Shots s in shotsList)
+            {
+                s.Draw(spriteBatch);
+            }
         }
 
         public List<Shots> ShotsList
