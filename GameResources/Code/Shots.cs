@@ -16,24 +16,25 @@ namespace TowerDefenceINF.GameResources.Code
 
         protected Rectangle boundingBox;
 
-        public Shots(Texture2D texture, Vector2 pos)
+        protected Enemy enemy;
+
+        public Shots(Texture2D texture, Vector2 pos, Enemy enemy)
         {
             this.texture = texture;
             this.pos = pos;
             boundingBox = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
-
+            this.enemy = enemy;
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            dirr = -towerPos;
+            dirr = enemy.GetPos() - pos;
             dirr.Normalize();
-            //dirr = e.GetPos() - towerPos;
-            pos += dirr * 2;
+            pos += dirr * 0.5f;
 
         }
 
-        public Vector2 shotsPos
+        public Vector2 ShotsPos
         {
             get
             {
@@ -45,20 +46,7 @@ namespace TowerDefenceINF.GameResources.Code
         public virtual void Draw(SpriteBatch spriteBatch)
         {
 
-          //if()
-          //  {
-          //      spriteBatch.Draw(texture, pos, Color.Red);
-          //  }
-
-          //if()
-          //  {
-          //      spriteBatch.Draw(texture, pos, Color.Blue);
-          //  }
-
-          //if()
-          //  {
-          //      spriteBatch.Draw(texture, pos, Color.Gray);
-          //  }
+            spriteBatch.Draw(texture, pos, Color.White);
            
         }
 

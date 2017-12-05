@@ -22,8 +22,8 @@ namespace TowerDefenceINF.GameResources.Code
 
             foreach (Enemy e in enemyList)
             {
-
-                if (Vector2.Distance(pos, e.GetPos()) < radius)
+                float dist = Vector2.Distance(pos, e.GetPos());
+                if (dist < radius)
                 {
 
 
