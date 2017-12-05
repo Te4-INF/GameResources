@@ -37,6 +37,7 @@ namespace TowerDefenceINF.GameResources.Code
         public override void Update(GameTime gameTime)
         {
             texturePosition += 2;
+            base.Update(gameTime);
 
             frameTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (frameTimer <= 0)

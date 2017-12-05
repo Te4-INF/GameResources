@@ -44,7 +44,7 @@ namespace TowerDefenceINF.GameResources.Code
         {
             get
             {
-                return simplePath.GetPos(texturePosition);
+                return pos;
             }
         }
 
@@ -76,7 +76,7 @@ namespace TowerDefenceINF.GameResources.Code
         {
             if (status == 0)
             {
-                texturePosition++;
+                pos = simplePath.GetPos(texturePosition);
             }
         }
 
@@ -84,7 +84,7 @@ namespace TowerDefenceINF.GameResources.Code
         {
             if (status != 2)
             {
-                spriteBatch.Draw(tex, simplePath.GetPos(texturePosition), sourceRectangle,
+                spriteBatch.Draw(tex, pos, sourceRectangle,
                 color, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
             }
         }

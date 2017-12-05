@@ -99,7 +99,7 @@ namespace TowerDefenceINF.GameResources.Code
             mouseVisibility = true;
 
             mapHandler = new MapHandler(graphics.GraphicsDevice, Content);
-            towerHandler = new TowerHandler(Content, graphics);
+            
             IsMouseVisible = true;
             backBufferHandler = new BackBufferHandler(GraphicsDevice, Content);
 
@@ -108,6 +108,7 @@ namespace TowerDefenceINF.GameResources.Code
 
             projectileHandler = new ProjectileHandler(Content);
             enemyHandler = new EnemyHandler(Content, mapHandler.GetSimplePath(), projectileHandler.ShotsList, uIHandler.Player);
+            towerHandler = new TowerHandler(Content, graphics, enemyHandler.enemyList);
         }
         
         
@@ -159,7 +160,7 @@ namespace TowerDefenceINF.GameResources.Code
                 mapHandler.Draw(spriteBatch);
                 towerHandler.Draw(spriteBatch);
                 enemyHandler.Draw(spriteBatch);
-                //projectileHandler.Draw(spriteBatch);
+                projectileHandler.Draw(spriteBatch);
                 uIHandler.Draw(spriteBatch);
             }
             else if(currentState == GameState.Gameover)
