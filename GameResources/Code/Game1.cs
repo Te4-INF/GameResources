@@ -54,6 +54,7 @@ namespace TowerDefenceINF.GameResources.Code
         ProjectileHandler projectileHandler;
         UIHandler uIHandler;
         EnemyHandler enemyHandler;
+        Player player;
 
         int width = 1600;
         int hight = 900;
@@ -102,8 +103,11 @@ namespace TowerDefenceINF.GameResources.Code
             IsMouseVisible = true;
             backBufferHandler = new BackBufferHandler(GraphicsDevice, Content);
 
+            uIHandler = new UIHandler(Content);
+            player = uIHandler.Player;
+
             projectileHandler = new ProjectileHandler(Content);
-            //enemyHandler = new EnemyHandler(Content, SimplePath map);
+            enemyHandler = new EnemyHandler(Content, mapHandler.GetSimplePath(), projectileHandler.ShotsList, uIHandler.Player);
         }
         
         
@@ -120,15 +124,19 @@ namespace TowerDefenceINF.GameResources.Code
             else if(currentState == GameState.Play)
             {
 
-                //mapHandler.Update(gameTime);
+                mapHandler.Update(gameTime);
                 
                 towerHandler.Update(gameTime, ref mouseVisibility, backBufferHandler.GetBackgroundLayer(), projectileHandler);
                 backBufferHandler.Update(GraphicsDevice, towerHandler.GetTowerList());
 
-                //enemyHandler.Update(gameTime);
+                enemyHandler.Update(gameTime);
                 projectileHandler.Update(gameTime);
                 //uIHandler.Update(gameTime);
-            }
+                if (player.Health == 0)
+                {
+                    currentState = GameState.Gameover;
+                }
+        }
             else if(currentState == GameState.Gameover)
             {
                 MenyKes();
@@ -142,7 +150,7 @@ namespace TowerDefenceINF.GameResources.Code
             if (currentState == GameState.Meny)
             {
                 GraphicsDevice.Clear(Color.White);
-                spriteBatch.DrawString(font, "TD", new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 25), Color.Black);
+                spriteBatch.DrawString(font, "TD", new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 50), Color.Black);
                 spriteBatch.DrawString(font, "Start Press Enter", new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 5), Color.Black);
             }
             else if(currentState == GameState.Play)
@@ -150,13 +158,14 @@ namespace TowerDefenceINF.GameResources.Code
                 GraphicsDevice.Clear(Color.Blue);
                 mapHandler.Draw(spriteBatch);
                 towerHandler.Draw(spriteBatch);
-                //enemyHandler.Draw(spriteBatch);
+                enemyHandler.Draw(spriteBatch);
                 //projectileHandler.Draw(spriteBatch);
-                //uIHandler.Draw(spriteBatch);
+                uIHandler.Draw(spriteBatch);
             }
             else if(currentState == GameState.Gameover)
             {
                 GraphicsDevice.Clear(Color.Green);
+                spriteBatch.DrawString(font, "Level: "+ player.Level.ToString(), new Vector2(Window.ClientBounds.Width / 2 - 100, Window.ClientBounds.Height / 2 - 25), Color.Black);
             }
             spriteBatch.End();
             base.Draw(gameTime);
