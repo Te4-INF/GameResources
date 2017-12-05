@@ -14,11 +14,15 @@ namespace TowerDefenceINF.GameResources.Code
 
         protected Rectangle destinationRectangle, sourceRectangle;
 
+        protected Color color;
+
         public Enemy(Texture2D tex, Vector2 pos)
             : base(tex, pos)
         {
             direction = new Vector2(1, 0);
             speed = new Vector2(5, 0);
+
+            color = Color.White;
         }
 
         public byte Health
@@ -52,6 +56,22 @@ namespace TowerDefenceINF.GameResources.Code
             }
         }
 
+        public float Speed
+        {
+            set
+            {
+                texturePosition -= value;
+            }
+        }
+
+        public Color Color
+        {
+            set
+            {
+                color = value;
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (status == 0)
@@ -65,7 +85,7 @@ namespace TowerDefenceINF.GameResources.Code
             if (status != 2)
             {
                 spriteBatch.Draw(tex, simplePath.GetPos(texturePosition), sourceRectangle,
-                Color.White, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
+                color, 0, Vector2.Zero, 1, SpriteEffects.FlipHorizontally, 0);
             }
         }
     }
