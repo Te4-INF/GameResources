@@ -23,15 +23,14 @@ namespace TowerDefenceINF.GameResources.Code
             this.texture = texture;
             this.pos = pos;
             boundingBox = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
-
+            this.enemy = enemy;
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            dirr = -towerPos;
+            dirr = enemy.GetPos() - pos;
             dirr.Normalize();
-            dirr = enemy.GetPos() - towerPos;
-            pos += dirr * 2;
+            pos += dirr * 0.5f;
 
         }
 

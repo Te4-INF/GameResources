@@ -22,7 +22,7 @@ namespace TowerDefenceINF.GameResources.Code
         Enemy testEnemy;
         List<Enemy> enemyList;
 
-        public TowerHandler(ContentManager content, GraphicsDeviceManager graphics)
+        public TowerHandler(ContentManager content, GraphicsDeviceManager graphics, List<Enemy> enemyList)
         {
 
             towerList = new List<Tower>();
@@ -31,7 +31,7 @@ namespace TowerDefenceINF.GameResources.Code
             towerTextures[0] = content.Load<Texture2D>("tower");
             this.graphics = graphics;
 
-            enemyList = new List<Enemy>();
+            this.enemyList = enemyList;
             //testEnemy = new Enemy(towerTextures[0], new Vector2(100, 100));
             //enemyList.Add(testEnemy);
 

@@ -17,7 +17,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         Vector2 position;
 
-        List<Enemy> enemyList;
+        public List<Enemy> enemyList;
         Enemy tempEnemy;
 
         List<Shots> shotsList;
@@ -79,7 +79,7 @@ namespace TowerDefenceINF.GameResources.Code
             {
                 foreach (Shots shot in shotsList)
                 {
-                    if (Vector2.Distance(enemy.Position, shot.shotsPos) < (radius + 30))
+                    if (Vector2.Distance(enemy.Position, shot.ShotsPos) < (radius + 30))
                     {
                         if (shot is FireShot)
                         {
