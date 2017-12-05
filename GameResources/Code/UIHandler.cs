@@ -9,18 +9,30 @@ using System.Threading.Tasks;
 
 namespace TowerDefenceINF.GameResources.Code
 {
-  public class UIHandler
+  class UIHandler
     {
-        SpriteFont UIfont;
+        SpriteFont UIFont;
 
-        public void loadFont(ContentManager content)
+        Player player;
+
+        public UIHandler(ContentManager content)
         {
-            UIfont = content.Load<SpriteFont>("UI_font");
+            UIFont = content.Load<SpriteFont>("UIFont");
+
+            player = new Player(UIFont);
         }
 
-        public void Update(SpriteBatch sb, int value, Vector2 stringPos) //e.g value is life (10) and stringPos would be (100,100)
+        public Player Player
         {
-            sb.DrawString(UIfont, value.ToString(), stringPos, Color.White);
+            get
+            {
+                return player;
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            player.Draw(spriteBatch);
         }
     }
 }

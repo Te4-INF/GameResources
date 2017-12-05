@@ -24,12 +24,12 @@ namespace TowerDefenceINF.GameResources.Code
 
         SimplePath simplePath;
 
-        int dummyHealth, dummyBalance, dummyWave;
+        Player player;
 
         float radius = 8;
 
         public EnemyHandler(ContentManager content, SimplePath simplePath,
-            List<Shots> shotsList)
+            List<Shots> shotsList, Player player)
         {
             spriteSheet = content.Load<Texture2D>("slimeSheet");
 
@@ -37,9 +37,11 @@ namespace TowerDefenceINF.GameResources.Code
 
             enemyList = new List<Enemy>();
 
-            shotsList = new List<Shots>();
+            this.shotsList = shotsList;
 
             this.simplePath = simplePath;
+
+            this.player = player;
 
             spawnAmount = 5;
             enemyKills = spawnAmount;
@@ -61,7 +63,7 @@ namespace TowerDefenceINF.GameResources.Code
                 if (enemyKills == 0)
                 {
                     enemies -= spawnAmount;
-                    dummyWave++;
+                    player.Level = 1;
                 }
 
                 if (enemies == 0)
@@ -77,34 +79,34 @@ namespace TowerDefenceINF.GameResources.Code
             {
                 foreach (Shots shot in shotsList)
                 {
-                //    if (shot is FireShot)
-                //    {
-                //        if ()
-                //    }
-                //    if (Vector2.Distance(enemy.Position, shot.Position) < (radius + shot.Radius))
-                //    {
-                //        if (shot is FireShot)
-                //        {
-
-                //        }
-                //        else if (shot is IceShot)
-                //        {
-
-                //        }
-                //        else
-                //        {
-
-                //        }
-                //    }
+                    if (Vector2.Distance(enemy.Position, shot.shotsPos) < (radius + 30))
+                    {
+                        if (shot is FireShot)
+                        {
+                            enemy.Health = 15;
+                            //15 DoT;
+                            enemy.Color = Color.Red;
+                        }
+                        else if (shot is IceShot)
+                        {
+                            enemy.Health = 15;
+                            enemy.Speed = 1;
+                            enemy.Color = Color.Blue;
+                        }
+                        else
+                        {
+                            enemy.Health = 20;
+                        }
+                    }
                 }
 
                 enemy.Update(gameTime);
 
-                if (enemy.Status == 2 || 1600 < enemy.Position.X)
+                if (enemy.Status == 2)
                 {
                     enemyList.Remove(enemy);
                     enemyKills--;
-                    dummyBalance++;
+                    player.Balance = 5;
                     break;
                 }
 
@@ -112,7 +114,7 @@ namespace TowerDefenceINF.GameResources.Code
                 {
                     enemyList.Remove(enemy);
                     enemyKills--;
-                    dummyHealth--;
+                    player.Health = 1;
                     break;
                 }
             }

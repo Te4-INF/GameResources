@@ -63,7 +63,7 @@ namespace TowerDefenceINF.GameResources.Code
         {
             if (mapIsLoaded)
             {
-                currentMapSpline.Draw(spriteBatch);
+                //currentMapSpline.Draw(spriteBatch);
                 spriteBatch.Draw(splineTextures, new Vector2(0, 0), Color.White);
 
             }
