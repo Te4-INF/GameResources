@@ -6,7 +6,7 @@ namespace TowerDefenceINF.GameResources.Code
 {
     abstract class Enemy : Animated
     {
-        protected byte health, status;
+        protected int health, status;
 
         protected float texturePosition;
 
@@ -48,7 +48,7 @@ namespace TowerDefenceINF.GameResources.Code
             }
         }
 
-        public byte Status
+        public int Status
         {
             get
             {

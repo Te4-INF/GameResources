@@ -83,17 +83,16 @@ namespace TowerDefenceINF.GameResources.Code
                     {
                         if (shot is FireShot)
                         {
-                            enemy.Health = 15;
                             enemy.Color = Color.Red;
                             enemy.FrameTimer = 3000;
                         }
-                        else if (shot is IceShot)
+                        if (shot is IceShot)
                         {
                             enemy.Health = 15;
                             enemy.Color = Color.Blue;
                             enemy.FrameTimer = 3000;
                         }
-                        else
+                        if (shot is StoneShot)
                         {
                             enemy.Health = 20;
                         }
@@ -108,7 +107,7 @@ namespace TowerDefenceINF.GameResources.Code
                 {
                     enemyList.Remove(enemy);
                     enemyKills--;
-                    player.Balance = 5;
+                    player.Balance = 10;
                     break;
                 }
 
