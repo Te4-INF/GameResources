@@ -24,7 +24,11 @@ namespace TowerDefenceINF.GameResources.Code
         Enemy testEnemy;
         List<Enemy> enemyList;
 
+
         List<Shots> shotsList;
+
+        MouseState mouseCurrent, mousePrevious;
+
 
         public TowerHandler(ContentManager content, GraphicsDeviceManager graphics, List<Enemy> enemyList,
             Player player, List<Shots> shotsList)
@@ -120,14 +124,17 @@ namespace TowerDefenceINF.GameResources.Code
 
             }
 
-            
+            mousePrevious = mouseCurrent;
+            mouseCurrent = Mouse.GetState();
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && towerChoice != 4 &&
+            if (mouseCurrent.LeftButton == ButtonState.Pressed && mousePrevious.LeftButton == ButtonState.Released && towerChoice != 4 &&
                 0 < mouseTower.GetPos().X && mouseTower.GetPos().X < (graphics.PreferredBackBufferWidth - mouseTower.GetTexture().Width) &&
                 0 < mouseTower.GetPos().Y && mouseTower.GetPos().Y < (graphics.PreferredBackBufferHeight - mouseTower.GetTexture().Height))
             {
 
                 bool testBool = PixelPerfectTowerCollision(renderTarget, mouseTower);
+
+
 
                 if (100 <= player.Balance)
                 {
