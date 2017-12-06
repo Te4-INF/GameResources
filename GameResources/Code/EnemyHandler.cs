@@ -84,19 +84,21 @@ namespace TowerDefenceINF.GameResources.Code
                         if (shot is FireShot)
                         {
                             enemy.Health = 15;
-                            //15 DoT;
                             enemy.Color = Color.Red;
+                            enemy.FrameTimer = 3000;
                         }
                         else if (shot is IceShot)
                         {
                             enemy.Health = 15;
-                            enemy.Speed = 1;
                             enemy.Color = Color.Blue;
+                            enemy.FrameTimer = 3000;
                         }
                         else
                         {
                             enemy.Health = 20;
                         }
+                        shotsList.Remove(shot);
+                        break;
                     }
                 }
 

@@ -76,6 +76,11 @@ namespace TowerDefenceINF.GameResources.Code
                 destinationRectangle.Height = moveRectangles[frame].Height * 2;
                 frameTimer = frameInterval;
             }
+
+            if (health <= 0)
+            {
+                status = 2;
+            }
         }
     }
 }
