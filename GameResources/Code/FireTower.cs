@@ -13,11 +13,13 @@ namespace TowerDefenceINF.GameResources.Code
 
         float shotTimer;
 
-        public FireTower(Texture2D tex, Vector2 pos) : base(tex, pos)
+        List<Shots> shotsList;
+
+        public FireTower(Texture2D tex, Vector2 pos, List<Shots> shotsList) : base(tex, pos)
         {
 
             price = 150;
-            
+            this.shotsList = shotsList;
 
         }
 
@@ -28,16 +30,25 @@ namespace TowerDefenceINF.GameResources.Code
             foreach (Enemy e in enemyList)
             {
 
-                if (Vector2.Distance(pos, e.GetPos()) < radius && shotTimer <= 0)
+                float dist = Vector2.Distance(pos, e.GetPos());
+                if (dist < radius && shotTimer <= 0)
                 {
                     shotTimer = 2f;
                     projectileHandler.FireShoot(pos, e);
 
                 }
 
-                else
-                    Console.WriteLine("ENEMY NOT DETECTED");
+                else if (dist > radius && shotTimer <= 0)
+                {
 
+                    foreach (FireShot fire in shotsList)
+                    {
+                        shotsList.Remove(fire);
+                        break;
+                    }
+
+
+                }
             }
 
         }

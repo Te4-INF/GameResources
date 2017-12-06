@@ -24,10 +24,14 @@ namespace TowerDefenceINF.GameResources.Code
         Enemy testEnemy;
         List<Enemy> enemyList;
 
+
+        List<Shots> shotsList;
+
         MouseState mouseCurrent, mousePrevious;
 
+
         public TowerHandler(ContentManager content, GraphicsDeviceManager graphics, List<Enemy> enemyList,
-            Player player)
+            Player player, List<Shots> shotsList)
         {
 
             towerList = new List<Tower>();
@@ -37,6 +41,8 @@ namespace TowerDefenceINF.GameResources.Code
             this.graphics = graphics;
 
             this.player = player;
+
+            this.shotsList = shotsList;
 
             this.enemyList = enemyList;
             //testEnemy = new Enemy(towerTextures[0], new Vector2(100, 100));
@@ -87,7 +93,7 @@ namespace TowerDefenceINF.GameResources.Code
             if (towerChoice == 1)
             {
 
-                mouseTower = new ArcherTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)));
+                mouseTower = new ArcherTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
 
                 test = false;
 
@@ -96,7 +102,7 @@ namespace TowerDefenceINF.GameResources.Code
             else if(towerChoice == 2)
             {
 
-                mouseTower = new FireTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)));
+                mouseTower = new FireTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
                 
                 test = false;
 
@@ -105,7 +111,7 @@ namespace TowerDefenceINF.GameResources.Code
             else if(towerChoice == 3)
             {
 
-                mouseTower = new IceTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)));
+                mouseTower = new IceTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
 
                 test = false;
 

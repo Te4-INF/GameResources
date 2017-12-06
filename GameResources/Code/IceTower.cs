@@ -12,10 +12,13 @@ namespace TowerDefenceINF.GameResources.Code
     {
         float shotTimer;
 
-        public IceTower(Texture2D tex, Vector2 pos) : base(tex, pos)
+        List<Shots> shotsList;
+
+        public IceTower(Texture2D tex, Vector2 pos, List<Shots> shotsList) : base(tex, pos)
         {
 
             price = 200;
+            this.shotsList = shotsList;
 
         }
 
@@ -37,7 +40,11 @@ namespace TowerDefenceINF.GameResources.Code
                 else if(dist > radius && shotTimer <= 0)
                 {
 
-
+                    foreach(IceShot ice in shotsList)
+                    {
+                        shotsList.Remove(ice);
+                        break;
+                    }
                     
 
                 }
