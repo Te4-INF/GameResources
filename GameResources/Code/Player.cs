@@ -37,6 +37,10 @@ namespace TowerDefenceINF.GameResources.Code
 
         public int Balance
         {
+            get
+            {
+                return balance;
+            }
             set
             {
                 balance += value;
@@ -57,9 +61,9 @@ namespace TowerDefenceINF.GameResources.Code
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(UIFont, "Health: " + health.ToString(), new Vector2(20, 860), Color.White);
-            spriteBatch.DrawString(UIFont, "Balance: " + balance.ToString(), new Vector2(200, 860), Color.White);
-            spriteBatch.DrawString(UIFont, "Level: " + level.ToString(), new Vector2(400, 860), Color.White);
+            spriteBatch.DrawString(UIFont, "Health: " + health.ToString() + "hp", new Vector2(20, 860), Color.White);
+            spriteBatch.DrawString(UIFont, "Level: " + level.ToString(), new Vector2(500, 860), Color.White);
+            spriteBatch.DrawString(UIFont, "Balance: $" + balance.ToString(), new Vector2(1000, 860), Color.White);
         }
     }
 }

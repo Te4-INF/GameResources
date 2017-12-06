@@ -72,10 +72,40 @@ namespace TowerDefenceINF.GameResources.Code
             }
         }
 
+        public float FrameTimer
+        {
+            set
+            {
+                frameTimer = value;
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
+            frameTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (status == 0)
             {
+                if (0 < frameTimer)
+                {
+                    if (color == Color.Blue)
+                    {
+                        Speed = 1;
+                    }
+                    else if (color == Color.Red)
+                    {
+                        health -= 5;
+                    }
+                    //else
+                    //{
+                    //    color = Color.White;
+                    //    Speed = 2;
+                    //}
+                }
+                else
+                {
+                    color = Color.White;
+                    Speed = 2;
+                }
                 pos = simplePath.GetPos(texturePosition);
             }
         }
