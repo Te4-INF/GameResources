@@ -13,9 +13,9 @@ namespace TowerDefenceINF.GameResources.Code
     {
         Texture2D fireShotTex;
         Texture2D iceShotTex;
-        Texture2D StoneShotTex;
+        Texture2D stoneShotTex;
 
-        Shots shots;
+        
 
         List<Shots> shotsList = new List<Shots>();
 
@@ -23,14 +23,14 @@ namespace TowerDefenceINF.GameResources.Code
         {
             fireShotTex = content.Load<Texture2D>("FireShot");
             iceShotTex = content.Load<Texture2D>("IceShot");
-            StoneShotTex = content.Load<Texture2D>("StoneShot");
+            stoneShotTex = content.Load<Texture2D>("StoneShot");
 
         }
 
         public void ArrowShoot(Vector2 towerPos, Enemy e)
         {
 
-            shotsList.Add(new StoneShot(StoneShotTex, towerPos, e));
+            shotsList.Add(new StoneShot(stoneShotTex, towerPos, e));
 
         }
 
@@ -60,11 +60,11 @@ namespace TowerDefenceINF.GameResources.Code
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch sb)
         {
             foreach (Shots s in shotsList)
             {
-                s.Draw(spriteBatch);
+                s.Draw(sb);
             }
         }
 

@@ -11,6 +11,8 @@ namespace TowerDefenceINF.GameResources.Code
     class ArcherTower : Tower
     {
 
+        float shotTimer;
+
         public ArcherTower(Texture2D tex, Vector2 pos) :base(tex, pos)
         {
 
@@ -21,13 +23,15 @@ namespace TowerDefenceINF.GameResources.Code
         public override void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
         {
 
+            shotTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             foreach (Enemy e in enemyList)
             {
 
-                if (Vector2.Distance(pos, e.GetPos()) < radius)
+                if (Vector2.Distance(pos, e.GetPos()) < radius && shotTimer <= 0)
                 {
-
-                    Console.WriteLine("ENEMY DETECTED");
+                    shotTimer = 2f;
+                    projectileHandler.ArrowShoot(pos, e);
 
                 }
 
