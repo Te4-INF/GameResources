@@ -108,7 +108,7 @@ namespace TowerDefenceINF.GameResources.Code
 
             projectileHandler = new ProjectileHandler(Content);
             enemyHandler = new EnemyHandler(Content, mapHandler.GetSimplePath(), projectileHandler.ShotsList, uIHandler.Player);
-            towerHandler = new TowerHandler(Content, graphics, enemyHandler.enemyList, uIHandler.Player);
+            towerHandler = new TowerHandler(Content, graphics, enemyHandler.enemyList, uIHandler.Player, projectileHandler.ShotsList);
         }
         
         
