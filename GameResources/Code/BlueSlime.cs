@@ -12,12 +12,14 @@ namespace TowerDefenceINF.GameResources.Code
             : base(tex, pos)
         {
             health = 50;
+            radius = 6;
+
 
             destinationRectangle = new Rectangle((int)position.X, (int)position.Y, 36, 36);
             sourceRectangle = new Rectangle(10, 81, 12, 15);
 
             frameInterval = 100;
-
+                                                    //var i bilden fienden i sina olika animeringssteg
             moveRectangles = new Rectangle[10];
 
             moveRectangles[0] = new Rectangle(10, 86, 12, 10);
@@ -34,12 +36,14 @@ namespace TowerDefenceINF.GameResources.Code
             this.simplePath = simplePath;
         }
 
+        
+
         public override void Update(GameTime gameTime)
         {
             texturePosition += 2;
             base.Update(gameTime);
 
-            frameTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            frameTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;    //nedan är animationen för fiendena
             if (frameTimer <= 0)
             {
                 if (frame < 9)
@@ -71,9 +75,7 @@ namespace TowerDefenceINF.GameResources.Code
                     frame = 0;
                     destinationRectangle.Y -= 3;
                 }
-                sourceRectangle = moveRectangles[frame];
-                destinationRectangle.Width = moveRectangles[frame].Width * 2;
-                destinationRectangle.Height = moveRectangles[frame].Height * 2;
+                sourceRectangle = moveRectangles[frame];              
                 frameTimer = frameInterval;
             }
 

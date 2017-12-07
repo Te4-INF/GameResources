@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefenceINF.GameResources.Code
 {
-    class TowerHandler: MasterHandler
+    class TowerHandler
     {
 
         private List<Tower> towerList;
@@ -21,7 +21,6 @@ namespace TowerDefenceINF.GameResources.Code
 
         protected Player player;
 
-        Enemy testEnemy;
         List<Enemy> enemyList;
 
 
@@ -45,15 +44,13 @@ namespace TowerDefenceINF.GameResources.Code
             this.shotsList = shotsList;
 
             this.enemyList = enemyList;
-            //testEnemy = new Enemy(towerTextures[0], new Vector2(100, 100));
-            //enemyList.Add(testEnemy);
 
         }
 
         public void Update(GameTime gameTime, ref bool test, RenderTarget2D renderTarget, ProjectileHandler projectileHandler)
         {
-
-            if (100 <= player.Balance)
+            //nedan visas bara tornen om man har rätt mängd pengar och även här väljer det torn som ska placeras
+            if (100 <= player.Balance) 
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.D1))
                 {
@@ -90,7 +87,7 @@ namespace TowerDefenceINF.GameResources.Code
 
             }
 
-            if (towerChoice == 1)
+            if (towerChoice == 1)  //skapar ett Archertorn
             {
 
                 mouseTower = new ArcherTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
@@ -99,7 +96,7 @@ namespace TowerDefenceINF.GameResources.Code
 
             }
 
-            else if(towerChoice == 2)
+            else if(towerChoice == 2)       //skapar ett eldtorn
             {
 
                 mouseTower = new FireTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
@@ -108,7 +105,7 @@ namespace TowerDefenceINF.GameResources.Code
 
             }
 
-            else if(towerChoice == 3)
+            else if(towerChoice == 3)  //skapar ett is torn
             {
 
                 mouseTower = new IceTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
@@ -135,7 +132,7 @@ namespace TowerDefenceINF.GameResources.Code
                 bool testBool = PixelPerfectTowerCollision(renderTarget, mouseTower);
 
 
-
+                //här dras pengar ifall man har valt att sätta ut ett specifikt torn
                 if (100 <= player.Balance)
                 {
                     if (towerChoice == 1)

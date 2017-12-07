@@ -17,7 +17,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         public ArcherTower(Texture2D tex, Vector2 pos, List<Shots> shotsList) :base(tex, pos)
         {
-
+            radius = 400;
             price = 100;
             this.shotsList = shotsList;
 
@@ -30,28 +30,15 @@ namespace TowerDefenceINF.GameResources.Code
 
             foreach (Enemy e in enemyList)
             {
-                float dist = Vector2.Distance(pos, e.GetPos());
-                if (dist < radius && shotTimer <= 0)
+                float dist = Vector2.Distance(pos, e.GetPos()); 
+                if (dist < radius && shotTimer <= 0)            //kollar om fienden är innanför radie och om den är så ska ett skott skjutas
                 {
                     shotTimer = 2f;
                     projectileHandler.ArrowShoot(pos, e);
 
                 }
 
-                else if (dist > radius && shotTimer <= 0)
-                {
-
-                    foreach (StoneShot stone in shotsList)
-                    {
-                        shotsList.Remove(stone);
-                        break;
-                    }
-
-
-                }
-                Console.WriteLine("ENEMY NOT DETECTED");
-
-            };
+            }
 
         }
 

@@ -15,8 +15,6 @@ namespace TowerDefenceINF.GameResources.Code
         Texture2D iceShotTex;
         Texture2D stoneShotTex;
 
-        
-
         List<Shots> shotsList = new List<Shots>();
 
         public ProjectileHandler(ContentManager content)
@@ -24,12 +22,11 @@ namespace TowerDefenceINF.GameResources.Code
             fireShotTex = content.Load<Texture2D>("FireShot");
             iceShotTex = content.Load<Texture2D>("IceShot");
             stoneShotTex = content.Load<Texture2D>("StoneShot");
-
         }
 
-        public void ArrowShoot(Vector2 towerPos, Enemy e)
+        public void ArrowShoot(Vector2 towerPos, Enemy e)                              //skapar skotten under.
         {
-
+            
             shotsList.Add(new StoneShot(stoneShotTex, towerPos, e));
 
         }
@@ -46,16 +43,31 @@ namespace TowerDefenceINF.GameResources.Code
 
             shotsList.Add(new IceShot(iceShotTex, towerPos, e));
 
-        }
+        }                                                                           
 
         public void Update(GameTime gameTime)
         {
 
+
             foreach (Shots s in shotsList)
             {
 
-                s.Update(gameTime);
+                if(s.enemy != null)
+                {
+                    s.Update(gameTime);
+                }
 
+                
+
+            }
+
+            for(int i = 0; i < shotsList.Count; i++)
+            {
+                if(shotsList[i].enemy == null)
+                {
+                    shotsList.RemoveAt(i);
+                    i--;
+                }
             }
 
         }
