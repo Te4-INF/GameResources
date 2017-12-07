@@ -124,15 +124,12 @@ namespace TowerDefenceINF.GameResources.Code
             }
             else if(currentState == GameState.Play)
             {
-
-                mapHandler.Update(gameTime);
                 
                 towerHandler.Update(gameTime, ref mouseVisibility, backBufferHandler.GetBackgroundLayer(), projectileHandler);
                 backBufferHandler.Update(GraphicsDevice, towerHandler.GetTowerList());
-
-                enemyHandler.Update(gameTime);
+                
                 projectileHandler.Update(gameTime);
-                //uIHandler.Update(gameTime);
+                enemyHandler.Update(gameTime);
                 if (player.Health == 0)
                 {
                     currentState = GameState.Gameover;
@@ -159,8 +156,9 @@ namespace TowerDefenceINF.GameResources.Code
                 GraphicsDevice.Clear(Color.Blue);
                 mapHandler.Draw(spriteBatch);
                 towerHandler.Draw(spriteBatch);
-                enemyHandler.Draw(spriteBatch);
                 projectileHandler.Draw(spriteBatch);
+                enemyHandler.Draw(spriteBatch);
+                
                 uIHandler.Draw(spriteBatch);
             }
             else if(currentState == GameState.Gameover)

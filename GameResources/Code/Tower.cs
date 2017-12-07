@@ -8,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace TowerDefenceINF.GameResources.Code
 {
-    abstract class Tower: GameObject
+    abstract class Tower : GameObject
     {
-        
+
         protected int price, radius;
 
-        public Tower(Texture2D tex, Vector2 pos): base(tex, pos)
+        public Tower(Texture2D tex, Vector2 pos) : base(tex, pos)
         {
-
-            radius = 420;
 
         }
 
@@ -29,7 +27,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         public virtual void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
         {
-            
+
 
 
         }
