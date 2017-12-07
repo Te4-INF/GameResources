@@ -13,66 +13,79 @@ namespace TowerDefenceINF.GameResources.Code
     {
         Texture2D fireShotTex;
         Texture2D iceShotTex;
-        Texture2D StoneShotTex;
+        Texture2D stoneShotTex;
 
-        Shots shots;
-
-        //Shots[] shots = new Shots[3];
-
-        List<Shots> ShotsList = new List<Shots>();
+        List<Shots> shotsList = new List<Shots>();
 
         public ProjectileHandler(ContentManager content)
         {
             fireShotTex = content.Load<Texture2D>("FireShot");
             iceShotTex = content.Load<Texture2D>("IceShot");
-            StoneShotTex = content.Load<Texture2D>("StoneShot");
-
-            //shots[0] = new FireShot(fireShotTex, new Vector2(100, 100)/*ska vara tornets position här iställett för den befintliga positionen*/);
-
-            //shots[1] = new IceShot(iceShotTex, new Vector2(100, 100)/*ska vara tornets position här iställett för den befintliga positionen*/);
-
-            //shots[2] = new StoneShot(StoneShotTex, new Vector2(100, 100)/*ska vara tornets position här iställett för den befintliga positionen*/);
-
+            stoneShotTex = content.Load<Texture2D>("StoneShot");
         }
 
-
-
-        public void Update(GameTime gameTime)
+        public void ArrowShoot(Vector2 towerPos, Enemy e)                              //skapar skotten under.
         {
-
-            foreach(Shots s in ShotsList)
-            {
-
-                s.Update(gameTime);
-
-            }
-
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            shots.Draw(spriteBatch);
-        }
-
-        public void ArrowShoot(Vector2 towerPos, Enemy e)
-        {
-
-            ShotsList.Add(new StoneShot(StoneShotTex, towerPos));
+            
+            shotsList.Add(new StoneShot(stoneShotTex, towerPos, e));
 
         }
 
         public void FireShoot(Vector2 towerPos, Enemy e)
         {
 
-            ShotsList.Add(new FireShot(fireShotTex, towerPos));
+            shotsList.Add(new FireShot(fireShotTex, towerPos, e));
 
         }
 
         public void IceShoot(Vector2 towerPos, Enemy e)
         {
 
-            ShotsList.Add(new IceShot(iceShotTex, towerPos));
+            shotsList.Add(new IceShot(iceShotTex, towerPos, e));
 
+        }                                                                           
+
+        public void Update(GameTime gameTime)
+        {
+
+
+            foreach (Shots s in shotsList)
+            {
+
+                if(s.enemy != null)
+                {
+                    s.Update(gameTime);
+                }
+
+                
+
+            }
+
+            for(int i = 0; i < shotsList.Count; i++)
+            {
+                if(shotsList[i].enemy == null)
+                {
+                    shotsList.RemoveAt(i);
+                    i--;
+                }
+            }
+
+        }
+
+        public void Draw(SpriteBatch sb)
+        {
+            foreach (Shots s in shotsList)
+            {
+                s.Draw(sb);
+            }
+        }
+
+        public List<Shots> ShotsList
+        {
+            get
+            {
+                return shotsList;
+            }
         }
 
     }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,35 +10,60 @@ namespace TowerDefenceINF.GameResources.Code
 {
      class Player
     {
-        int life;
-        int cash;
-        int wave;
+        int health, balance, level;
 
-        public Player(int life, int cash, int wave) : base()
+        SpriteFont UIFont;
+
+        public Player(SpriteFont UIFont)
         {
-            this.life = 10;
-            this.cash = 1000;
-            this.wave = 1;
+            this.UIFont = UIFont;
+
+            health = 50;
+            balance = 200;
+            level = 1;
         }
 
-        public int getLife()
+        public int Health
         {
-            return life;
+            get
+            {
+                return health;
+            }
+            set
+            {
+                health -= value;
+            }
         }
 
-        public void setLife(int newLife)
+        public int Balance
         {
-            this.life = newLife;
+            get
+            {
+                return balance;
+            }
+            set
+            {
+                balance += value;
+            }
         }
 
-        public void setCash(int newCash)
+        public int Level
         {
-            this.cash = newCash;
+            get
+            {
+                return level;
+            }
+            set
+            {
+                level += value;
+            }
         }
 
-        public void setWave(int newWave)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            this.wave = newWave;
+            spriteBatch.DrawString(UIFont, "Health: " + health.ToString() + "hp", new Vector2(20, 860), Color.White);
+            spriteBatch.DrawString(UIFont, "Level: " + level.ToString(), new Vector2(500, 860), Color.White);
+            spriteBatch.DrawString(UIFont, "Balance: $" + balance.ToString(), new Vector2(1000, 860), Color.White);
         }
     }
 }

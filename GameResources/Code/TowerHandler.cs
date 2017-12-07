@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace TowerDefenceINF.GameResources.Code
 {
-    class TowerHandler: MasterHandler
+    class TowerHandler
     {
 
         private List<Tower> towerList;
@@ -19,10 +19,18 @@ namespace TowerDefenceINF.GameResources.Code
         private Tower mouseTower;
         private GraphicsDeviceManager graphics;
 
-        Enemy testEnemy;
+        protected Player player;
+
         List<Enemy> enemyList;
 
-        public TowerHandler(ContentManager content, GraphicsDeviceManager graphics)
+
+        List<Shots> shotsList;
+
+        MouseState mouseCurrent, mousePrevious;
+
+
+        public TowerHandler(ContentManager content, GraphicsDeviceManager graphics, List<Enemy> enemyList,
+            Player player, List<Shots> shotsList)
         {
 
             towerList = new List<Tower>();
@@ -31,34 +39,45 @@ namespace TowerDefenceINF.GameResources.Code
             towerTextures[0] = content.Load<Texture2D>("tower");
             this.graphics = graphics;
 
-            enemyList = new List<Enemy>();
-            //testEnemy = new Enemy(towerTextures[0], new Vector2(100, 100));
-            //enemyList.Add(testEnemy);
+            this.player = player;
+
+            this.shotsList = shotsList;
+
+            this.enemyList = enemyList;
 
         }
 
         public void Update(GameTime gameTime, ref bool test, RenderTarget2D renderTarget, ProjectileHandler projectileHandler)
         {
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D1))
+            //nedan visas bara tornen om man har rätt mängd pengar och även här väljer det torn som ska placeras
+            if (100 <= player.Balance) 
             {
+                if (Keyboard.GetState().IsKeyDown(Keys.D1))
+                {
 
-                towerChoice = 1;
+                    towerChoice = 1;
 
+                }
             }
 
-            else if(Keyboard.GetState().IsKeyDown(Keys.D2))
+            if (150 <= player.Balance)
             {
+                if (Keyboard.GetState().IsKeyDown(Keys.D2))
+                {
 
-                towerChoice = 2;
+                    towerChoice = 2;
 
+                }
             }
 
-            else if (Keyboard.GetState().IsKeyDown(Keys.D3))
+            if (200 <= player.Balance)
             {
+                if (Keyboard.GetState().IsKeyDown(Keys.D3))
+                {
 
-                towerChoice = 3;
+                    towerChoice = 3;
 
+                }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.L))
@@ -68,28 +87,28 @@ namespace TowerDefenceINF.GameResources.Code
 
             }
 
-            if (towerChoice == 1)
+            if (towerChoice == 1)  //skapar ett Archertorn
             {
 
-                mouseTower = new ArcherTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)));
+                mouseTower = new ArcherTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
 
                 test = false;
 
             }
 
-            else if(towerChoice == 2)
+            else if(towerChoice == 2)       //skapar ett eldtorn
             {
 
-                mouseTower = new FireTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)));
+                mouseTower = new FireTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
                 
                 test = false;
 
             }
 
-            else if(towerChoice == 3)
+            else if(towerChoice == 3)  //skapar ett is torn
             {
 
-                mouseTower = new IceTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)));
+                mouseTower = new IceTower(towerTextures[0], new Vector2(Mouse.GetState().X - (towerTextures[0].Width / 2), Mouse.GetState().Y - (towerTextures[0].Height / 2)), shotsList);
 
                 test = false;
 
@@ -102,12 +121,41 @@ namespace TowerDefenceINF.GameResources.Code
 
             }
 
-            
+            mousePrevious = mouseCurrent;
+            mouseCurrent = Mouse.GetState();
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && towerChoice != 4)
+            if (mouseCurrent.LeftButton == ButtonState.Pressed && mousePrevious.LeftButton == ButtonState.Released && towerChoice != 4 &&
+                0 < mouseTower.GetPos().X && mouseTower.GetPos().X < (graphics.PreferredBackBufferWidth - mouseTower.GetTexture().Width) &&
+                0 < mouseTower.GetPos().Y && mouseTower.GetPos().Y < (graphics.PreferredBackBufferHeight - mouseTower.GetTexture().Height))
             {
 
                 bool testBool = PixelPerfectTowerCollision(renderTarget, mouseTower);
+
+
+                //här dras pengar ifall man har valt att sätta ut ett specifikt torn
+                if (100 <= player.Balance)
+                {
+                    if (towerChoice == 1)
+                    {
+                        player.Balance = -100;
+                    }
+                }
+
+                if (150 <= player.Balance)
+                {
+                    if (towerChoice == 2)
+                    {
+                        player.Balance = -150;
+                    }
+                }
+                
+                if (200 <= player.Balance)
+                {
+                    if (towerChoice == 3)
+                    {
+                        player.Balance = -200;
+                    }
+                }
 
                 if (!testBool)
                 {
@@ -160,13 +208,14 @@ namespace TowerDefenceINF.GameResources.Code
 
         public virtual bool PixelPerfectTowerCollision(RenderTarget2D renderTarget, Tower mouseTower)
         {
-
+            //if (mouseTower.GetTexture().Width / 2 < mouseTower.GetPos().X && mouseTower.GetPos().X < graphics.PreferredBackBufferWidth - mouseTower.GetTexture().Width / 2)
+            //{
                 Color[] dataA = new Color[mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height];
                 mouseTower.GetTexture().GetData<Color>(dataA);
 
                 Color[] dataB = new Color[mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height];
                 renderTarget.GetData<Color>(0, mouseTower.GetBoundingBox(), dataB, 0, mouseTower.GetBoundingBox().Width * mouseTower.GetBoundingBox().Height);
-            
+
 
                 for (int i = 0; i < dataA.Length; i++)
                 {
@@ -181,10 +230,16 @@ namespace TowerDefenceINF.GameResources.Code
                         return true;
 
                     }
-                
-                }
 
-            return false;
+                }
+            //}
+            //else
+            //{
+            //    return true;
+            //}
+            //if (mouseTower.GetPos().X + mouseTower.GetTexture().Width > 0 && mouseTower.GetPos().X < (graphics.PreferredBackBufferWidth - mouseTower.GetTexture().Width))
+
+                return false;
 
         }
 
@@ -195,21 +250,21 @@ namespace TowerDefenceINF.GameResources.Code
 
         }
 
-        public bool MouseInWindow()
-        {
+        //public bool MouseInWindow()
+        //{
 
-            bool tempBool = true;
+        //    bool tempBool = true;
 
-            if(mouseTower.GetPos().X < 0 && mouseTower.GetPos().X > (graphics.PreferredBackBufferWidth - mouseTower.GetTexture().Width))
-            {
+        //    if(mouseTower.GetPos().X < 0 && mouseTower.GetPos().X > (graphics.PreferredBackBufferWidth - mouseTower.GetTexture().Width))
+        //    {
 
 
 
-            }
+        //    }
 
-            return tempBool;
+        //    return tempBool;
 
-        }
+        //}
 
     }
 }

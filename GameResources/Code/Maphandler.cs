@@ -26,10 +26,7 @@ namespace TowerDefenceINF.GameResources.Code
             LoadMap(graphics);
             loadMap(content);
         }
-        public void Update(GameTime gameTime)
-        {
-           
-        }
+
         public void loadMap(ContentManager content)
         {
             splineTextures = content.Load<Texture2D>("meh");
@@ -63,7 +60,6 @@ namespace TowerDefenceINF.GameResources.Code
         {
             if (mapIsLoaded)
             {
-                currentMapSpline.Draw(spriteBatch);
                 spriteBatch.Draw(splineTextures, new Vector2(0, 0), Color.White);
 
             }

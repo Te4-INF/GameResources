@@ -56,7 +56,6 @@
     <Compile Include="GameResources\Code\IceShot.cs" />
     <Compile Include="GameResources\Code\IceTower.cs" />
     <Compile Include="GameResources\Code\Maphandler.cs" />
-    <Compile Include="GameResources\Code\MasterHandler.cs" />
     <Compile Include="GameResources\Code\Player.cs" />
     <Compile Include="GameResources\Code\Program.cs" />
     <Compile Include="GameResources\Code\ProjectileHandler.cs" />

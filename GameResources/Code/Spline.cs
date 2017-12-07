@@ -24,11 +24,6 @@ namespace TowerDefenceINF.GameResources.Code
             simplePath.AddPoint(new Vector2(x, y));
         }
 
-        public void Draw(SpriteBatch spriteBatch) //Ritar utt splinen
-        {
-            simplePath.Draw(spriteBatch);
-        }
-
         public SimplePath GetSimplePath()
         {
 

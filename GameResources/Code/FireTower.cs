@@ -10,29 +10,34 @@ namespace TowerDefenceINF.GameResources.Code
 {
     class FireTower : Tower
     {
-        public FireTower(Texture2D tex, Vector2 pos) : base(tex, pos)
-        {
 
+        float shotTimer;
+
+        List<Shots> shotsList;
+
+        public FireTower(Texture2D tex, Vector2 pos, List<Shots> shotsList) : base(tex, pos)
+        {
+            radius = 200;
             price = 150;
+            this.shotsList = shotsList;
 
         }
 
         public override void Update(GameTime gameTime, List<Enemy> enemyList, ProjectileHandler projectileHandler)
         {
+            shotTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             foreach (Enemy e in enemyList)
             {
 
-                if (Vector2.Distance(pos, e.GetPos()) < radius)
-                {
+                float dist = Vector2.Distance(pos, e.GetPos());
 
-                    Console.WriteLine("ENEMY DETECTED");
+                if (dist < radius && shotTimer <= 0) //om den är innanför radien så ska ett skott skutas                                                 fel!!!!!!!!!!!!!!!!!!!!!
+                {
+                    shotTimer = 2f;
+                    projectileHandler.FireShoot(pos, e);
 
                 }
-
-                else
-                    Console.WriteLine("ENEMY NOT DETECTED");
-
             }
 
         }

@@ -11,7 +11,7 @@ namespace TowerDefenceINF.GameResources.Code
     class FireShot : Shots
     {
 
-        public FireShot(Texture2D texture, Vector2 pos) : base(texture, pos)
+        public FireShot(Texture2D texture, Vector2 pos, Enemy enemy) : base(texture, pos, enemy)
         {
             
 

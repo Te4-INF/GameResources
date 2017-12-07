@@ -12,46 +12,72 @@ namespace TowerDefenceINF.GameResources.Code
     {
         protected Texture2D texture;
 
-        protected Vector2 pos, dirr, towerPos;
+        protected Vector2 pos, dirr, center, targetPos;
+
+        protected int radius;
 
         protected Rectangle boundingBox;
 
-        public Shots(Texture2D texture, Vector2 pos)
+        public Enemy enemy;
+
+        public Shots(Texture2D texture, Vector2 pos, Enemy enemy)
         {
             this.texture = texture;
             this.pos = pos;
+            radius = texture.Width / 2;
+            center = new Vector2(pos.X + (texture.Width / 2), pos.Y + (texture.Height / 2));
             boundingBox = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
-
+            this.enemy = enemy;
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            dirr = -towerPos;
-            dirr.Normalize();
-            //dirr = e.GetPos() - towerPos;
-            pos += dirr * 2;
+            center = new Vector2(pos.X + (texture.Width / 2), pos.Y + (texture.Height / 2));
+            targetPos = new Vector2(enemy.Center.X - (texture.Width / 2), enemy.Center.Y - (texture.Height / 2));
+
+
+
+            if (enemy.Status != 2)
+            {
+                dirr = targetPos - pos;        //vilken riktning
+                dirr.Normalize();                   //
+                pos += dirr * 4f;                   // hastighet på skotten
+            } 
+            else
+            {
+                enemy = null;
+            }
 
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public Vector2 ShotsPos
+        {
+            get
+            {
+                return pos;
+            }
+
+        }
+
+        public Vector2 GetCenter()
+        {
+            return center;
+        }
+
+        public int GetRadius()
         {
 
-          //if()
-          //  {
-          //      spriteBatch.Draw(texture, pos, Color.Red);
-          //  }
+            return radius;
 
-          //if()
-          //  {
-          //      spriteBatch.Draw(texture, pos, Color.Blue);
-          //  }
-
-          //if()
-          //  {
-          //      spriteBatch.Draw(texture, pos, Color.Gray);
-          //  }
-           
         }
 
+        public virtual void Draw(SpriteBatch sb)
+        {
+            if(enemy!= null && enemy.Status != 2)
+                sb.Draw(texture, pos, Color.White);
+
+            
+        }
+        
     }
 }
