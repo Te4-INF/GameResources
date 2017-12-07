@@ -16,6 +16,10 @@ namespace TowerDefenceINF.GameResources.Code
 
         protected Color color;
 
+        protected int radius;
+
+        protected Vector2  center;
+
         public Enemy(Texture2D tex, Vector2 pos)
             : base(tex, pos)
         {
@@ -23,6 +27,24 @@ namespace TowerDefenceINF.GameResources.Code
             speed = new Vector2(5, 0);
 
             color = Color.White;
+
+            center = new Vector2(pos.X + 7, pos.Y + 5.5f);
+        }
+
+        public int Radius
+        {
+            get
+            {
+                return radius;
+            }
+        }
+
+        public Vector2 Center
+        {
+            get
+            {
+                return center;
+            }
         }
 
         public byte Health
@@ -82,26 +104,24 @@ namespace TowerDefenceINF.GameResources.Code
 
         public override void Update(GameTime gameTime)
         {
+            center = new Vector2(pos.X + 7, pos.Y + 5.5f);
+
             frameTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (status == 0)
             {
                 if (0 < frameTimer)
                 {
-                    if (color == Color.Blue)
+                    if (color == Color.Blue)        //om fienden är blå så är hastigheten lägre
                     {
                         Speed = 1;
                     }
-                    else if (color == Color.Red)
+                    else if (color == Color.Red)    //är den röd så tar den -5 per frame
                     {
                         health -= 5;
                     }
-                    //else
-                    //{
-                    //    color = Color.White;
-                    //    Speed = 2;
-                    //}
+
                 }
-                else
+                else                            //om den har vanlig färg så är hastigheten 2
                 {
                     color = Color.White;
                     Speed = 2;

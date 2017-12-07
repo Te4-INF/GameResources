@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Spline;
+using System;
 
 namespace TowerDefenceINF.GameResources.Code
 {
@@ -25,8 +26,6 @@ namespace TowerDefenceINF.GameResources.Code
         SimplePath simplePath;
 
         Player player;
-
-        float radius = 8;
 
         public EnemyHandler(ContentManager content, SimplePath simplePath,
             List<Shots> shotsList, Player player)
@@ -52,7 +51,7 @@ namespace TowerDefenceINF.GameResources.Code
             spawnTimer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (spawnTimer <= 0)
             {
-                if (enemies < spawnAmount)
+                if (enemies < spawnAmount)      //lägger till en fiende
                 {
                     tempEnemy = new BlueSlime(spriteSheet, position, simplePath);
                     enemyList.Add(tempEnemy);
@@ -60,13 +59,13 @@ namespace TowerDefenceINF.GameResources.Code
                     enemies++;
                 }
 
-                if (enemyKills == 0)
+                if (enemyKills == 0)        // lägger till en level när fienderna är dödade
                 {
                     enemies -= spawnAmount;
                     player.Level = 1;
                 }
 
-                if (enemies == 0)
+                if (enemies == 0)           //lägger på 5 extra varje runda
                 {
                     spawnAmount += 5;
                     enemyKills = spawnAmount;
@@ -79,20 +78,25 @@ namespace TowerDefenceINF.GameResources.Code
             {
                 foreach (Shots shot in shotsList)
                 {
-                    if (Vector2.Distance(enemy.Position, shot.ShotsPos) < (radius + 30))
+
+                    float dist = Vector2.Distance(enemy.Center, shot.GetCenter());
+                    float radius = shot.GetRadius() + enemy.Radius;
+                    if (dist < radius)
                     {
-                        if (shot is FireShot)
+                        Console.WriteLine("TEST");
+
+                        if (shot is FireShot)               //ändrar färgen på fienden till röd ifall den blir träffad av rött skott, skadar över tid
                         {
                             enemy.Color = Color.Red;
                             enemy.FrameTimer = 3000;
                         }
-                        if (shot is IceShot)
+                        if (shot is IceShot)                //ändrar färgen på fienden till blå ifall den blir träffad av blått skott, blå skott skadar 15
                         {
                             enemy.Health = 15;
                             enemy.Color = Color.Blue;
                             enemy.FrameTimer = 3000;
                         }
-                        if (shot is StoneShot)
+                        if (shot is StoneShot)              //grå skott skadar 20
                         {
                             enemy.Health = 20;
                         }
@@ -103,7 +107,7 @@ namespace TowerDefenceINF.GameResources.Code
 
                 enemy.Update(gameTime);
 
-                if (enemy.Status == 2)
+                if (enemy.Status == 2)          //tar bort fienden ifall fienden är död och ger även 10 pengar
                 {
                     enemyList.Remove(enemy);
                     enemyKills--;
@@ -111,7 +115,7 @@ namespace TowerDefenceINF.GameResources.Code
                     break;
                 }
 
-                if (1600 < enemy.Position.X)
+                if (1600 < enemy.Position.X)        //om fienden når slutet av banan så förlorar man 1 liv
                 {
                     enemyList.Remove(enemy);
                     enemyKills--;

@@ -17,7 +17,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         public FireTower(Texture2D tex, Vector2 pos, List<Shots> shotsList) : base(tex, pos)
         {
-
+            radius = 200;
             price = 150;
             this.shotsList = shotsList;
 
@@ -31,22 +31,11 @@ namespace TowerDefenceINF.GameResources.Code
             {
 
                 float dist = Vector2.Distance(pos, e.GetPos());
-                if (dist < radius && shotTimer <= 0)
+
+                if (dist < radius && shotTimer <= 0) //om den är innanför radien så ska ett skott skutas                                                 fel!!!!!!!!!!!!!!!!!!!!!
                 {
                     shotTimer = 2f;
                     projectileHandler.FireShoot(pos, e);
-
-                }
-
-                else if (dist > radius && shotTimer <= 0)
-                {
-
-                    foreach (FireShot fire in shotsList)
-                    {
-                        shotsList.Remove(fire);
-                        break;
-                    }
-
 
                 }
             }

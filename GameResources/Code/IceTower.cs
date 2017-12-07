@@ -16,7 +16,7 @@ namespace TowerDefenceINF.GameResources.Code
 
         public IceTower(Texture2D tex, Vector2 pos, List<Shots> shotsList) : base(tex, pos)
         {
-
+            radius = 200;
             price = 200;
             this.shotsList = shotsList;
 
@@ -29,28 +29,14 @@ namespace TowerDefenceINF.GameResources.Code
             foreach (Enemy e in enemyList)
             {
                 float dist = Vector2.Distance(pos, e.GetPos());
-                if (dist < radius && shotTimer <= 0)
+            
+                if (dist < radius && shotTimer <= 0)        //kollar om fienden är innanför radie och om den är så ska ett skott skjutas
                 {
                     shotTimer = 2f;
 
                     projectileHandler.IceShoot(pos, e);
 
-                }
-
-                else if(dist > radius && shotTimer <= 0)
-                {
-
-                    foreach(IceShot ice in shotsList)
-                    {
-                        shotsList.Remove(ice);
-                        break;
-                    }
-                    
-
-                }
-
-                   //Console.WriteLine("ENEMY NOT DETECTED");
-
+                } 
 
             }
 
